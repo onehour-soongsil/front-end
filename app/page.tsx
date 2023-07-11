@@ -5,7 +5,7 @@ export default function Home() {
   let name = "park";
   return (
     <div>
-      <div>main</div>
+      <div>시작페이지</div>
     </div>
   );
 }
