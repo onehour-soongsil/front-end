@@ -10,9 +10,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",
+    "antd": "^5.6.4",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
     "react": "18.2.0",
@@ -31,9 +33,9 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.0",
     "lint-staged": "^13.2.3",
-    "prettier": "^2.8.8",
-    "husky": "^8.0.0"
+    "prettier": "^2.8.8"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
