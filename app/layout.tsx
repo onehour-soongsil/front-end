@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import NavigationBar from "./components/nav-bar/NavigationBar";
+import NavigationBar from "./components/basic/NavigationBar";
+import FooterComponent from "./components/basic/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <NavigationBar />
         </nav>
         <main>{children}</main>
+        <FooterComponent />
       </body>
     </html>
   );
