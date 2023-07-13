@@ -1,0 +1,62 @@
+{
+  "kind": "onehour#goalListResponse",
+  "etag": "asdlfjalsoaajsif",
+  "items": [
+    {
+      "kind": "onehour#goalResult",
+      "etag": "iuXeoSQwO2BaagdDSINgUbc",
+      "id": {
+        "kind": "onehour#goal",
+        "noticeId": "eIh2S0ZzahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.07.13",
+        "title": "매일 영어 공부 1시간",
+        "description": "매일 영어 공부 1시간씩 하기!",
+        "publishTime": "2023.07.13"
+      }
+    },
+    {
+      "kind": "onehour#goalResult",
+      "etag": "SQwO2BaagdDSINgUbc",
+      "id": {
+        "kind": "onehour#goal",
+        "noticeId": "eIh2ZzahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.07.12",
+        "title": "매일 운동 1시간",
+        "description": "매일 운동 1시간씩 하기!",
+        "publishTime": "2023.07.12"
+      }
+    },
+    {
+      "kind": "onehour#goalResult",
+      "etag": "iasavzvvvziUbc",
+      "id": {
+        "kind": "onehour#goal",
+        "noticeId": "eIassdhkklZzahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.07.10",
+        "title": "매일 명상 1시간",
+        "description": "매일 명상 1시간씩 하기!",
+        "publishTime": "2023.07.10"
+      }
+    },
+    {
+      "kind": "onehour#goalResult",
+      "etag": "iuXeoSQwO2BaagdDSkafafad",
+      "id": {
+        "kind": "onehour#goal",
+        "noticeId": "eIh2S0ZzahI"
+      },
+      "snippet": {
+        "publishedAt": "2023.07.11",
+        "title": "집청소",
+        "description": "집청소 1시간 하기!",
+        "publishTime": "2023.07.11"
+      }
+    }
+  ]
+}
