@@ -24,7 +24,6 @@
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
     "no-useless-catch": "off",
-    "react-hooks/rules-of-hooks": "error", // 중복 제거 후 한 번만 설정
-    "react-hooks/exhaustive-deps": "warn" // 중복 제거 후 한 번만 설정
+    "react-hooks/rules-of-hooks": "error"
   }
 }
