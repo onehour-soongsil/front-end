@@ -1,21 +1,25 @@
 "use client";
 
 import { Button, Form, Input, Select } from "antd";
+import axios from "axios";
 import React from "react";
 
 const { Option } = Select;
 
 export default function Page() {
   const [form] = Form.useForm();
-  const onFinish = values => {
+  async function onFinish(values) {
     console.log("Received values of form: ", values);
-  };
+    axios
+      .post("/api/register", values) //
+      .then(res => console.log(res));
+  }
 
   return (
     <Form
       form={form}
       name="register"
-      onFinish={onFinish}
+      onFinish={() => onFinish}
       style={{
         width: "100%",
         height: "100vh",
