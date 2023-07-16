@@ -7,6 +7,7 @@ import goalImage from "/public/images/goalImage.png";
 import Image from "next/image";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { Button, Space } from "antd";
+import Link from "next/link";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -17,6 +18,9 @@ const contentStyle: React.CSSProperties = {
 };
 
 interface GoalItemType {
+  id: {
+    goalId: string;
+  };
   snippet: {
     title: string;
   };
@@ -66,18 +70,20 @@ export default function GoalPage() {
       >
         {goal.map((item, i) => (
           <div>
-            <h3 style={contentStyle}>
-              <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Image
-                  src={goalImage}
-                  alt="image1"
-                  width="400"
-                  height="400"
-                  style={{ marginTop: "20px" }}
-                />
-              </div>
-              {goal.length > 0 && <span>{goal[i].snippet.title}</span>}
-            </h3>
+            <Link href={`/detail/${goal[i].id.goalId}`}>
+              <h3 style={contentStyle}>
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                  <Image
+                    src={goalImage}
+                    alt="image1"
+                    width="400"
+                    height="400"
+                    style={{ marginTop: "20px" }}
+                  />
+                </div>
+                {goal.length > 0 && <span>{goal[i].snippet.title}</span>}
+              </h3>
+            </Link>
           </div>
         ))}
       </Carousel>
