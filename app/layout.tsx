@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <NavigationBar />
         </nav>
         <main>{children}</main>
-        <FooterComponent />
+        {/* <FooterComponent /> */}
       </body>
     </html>
   );

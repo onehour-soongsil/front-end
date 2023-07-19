@@ -1,3 +1,12 @@
-export default function GoalDetailPage() {
-  return <div>목표 상세 페이지</div>;
+import Side from "@/app/components/goalDetailPage/Side";
+import Main from "@/app/components/goalDetailPage/Main";
+
+export default function GoalDetailPage(props) {
+  console.log(props);
+  return (
+    <>
+      <Main goalId={props.params.id} />
+      <Side />
+    </>
+  );
 }
