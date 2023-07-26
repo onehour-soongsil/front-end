@@ -1,5 +1,8 @@
+"use client";
+
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
 import NavigationBar from "./components/basic/NavigationBar";
 import FooterComponent from "./components/basic/footer";
 
@@ -14,11 +17,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <nav>
-          <NavigationBar />
-        </nav>
-        <main>{children}</main>
-        {/* <FooterComponent /> */}
+        <SessionProvider>
+          <nav>
+            <NavigationBar />
+          </nav>
+          <main>{children}</main>
+          {/* <FooterComponent /> */}
+        </SessionProvider>
       </body>
     </html>
   );

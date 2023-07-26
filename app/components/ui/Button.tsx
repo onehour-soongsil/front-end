@@ -2,10 +2,25 @@
 
 import { Button as AntButton } from "antd";
 
-export default function Button({ text, onClick }) {
+interface ButtonProps {
+  danger?: boolean;
+  type?: "primary" | "ghost" | "dashed" | "link" | "text" | "default";
+  text: string;
+  onClick?: () => void;
+}
+
+function Button({ danger, type, text, onClick }: ButtonProps) {
   return (
-    <AntButton type="primary" size="large" onClick={onClick}>
+    <AntButton type={type} size="large" onClick={onClick} danger={danger}>
       {text}
     </AntButton>
   );
 }
+
+Button.defaultProps = {
+  danger: false,
+  type: "default",
+  onClick: () => {},
+};
+
+export default Button;
