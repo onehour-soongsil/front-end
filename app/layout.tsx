@@ -1,10 +1,7 @@
-"use client";
-
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { SessionProvider } from "next-auth/react";
-import NavigationBar from "./components/basic/NavigationBar";
-import FooterComponent from "./components/basic/footer";
+import NavigationBar from "./components/basic/navigation/NavigationBar";
+import GetSessionProvider from "./provider/GetSessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,13 +14,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider>
+        <GetSessionProvider>
           <nav>
             <NavigationBar />
           </nav>
           <main>{children}</main>
-          {/* <FooterComponent /> */}
-        </SessionProvider>
+        </GetSessionProvider>
       </body>
     </html>
   );
