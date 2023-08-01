@@ -50,6 +50,7 @@ export default function Timer() {
   useEffect(() => {
     // 타이머가 1시간 이상인 경우 처리
     if (time >= 5 && !isCompleted) {
+      //5를 나중에 3600으로 바꿔야함
       handleCompletion();
     }
   }, [time, isCompleted]);
@@ -60,21 +61,25 @@ export default function Timer() {
         <FinishTodaysGoal />
       ) : (
         <>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center justify-center mt-49">
             <h4 className="text-2xl">할 수 있잖아? 힘내보는거야!</h4>
           </div>
-          <div className="flex text-9xl justify-center text-red-500 font-bold mt-3">
+          <div className="flex text-9xl justify-center items-center text-red-500 font-bold mt-61">
             {formatTime(time)}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-36 space-x-20">
             <Button
-              className="text-red-400 hover:text-red-900"
-              danger={false}
-              // type="primary"
+              className="bg-black w-44 h-20 font-bold text-2xl hover:bg-gray-500"
+              type="ghost"
               onClick={stopTimer}
               text="타이머 중지"
             />
-            <Button type="primary" danger onClick={startTimer} text="타이머 시작" />
+            <Button
+              className="w-44 h-20 font-bold text-2xl hover:bg-red-300"
+              type="ghost"
+              onClick={startTimer}
+              text="타이머 시작"
+            />
           </div>
         </>
       )}

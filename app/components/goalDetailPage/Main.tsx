@@ -31,12 +31,12 @@ export default function Main(props: { goalId: string }) {
       <div className="h-300vh">
         <div id="1" className="relative h-screen">
           <div className="flex items-center flex-col">
-            <div className="mt-24">
+            <div className="mt-236">
               {selectedGoal && (
                 <h1 className="text-40px font-bold">{selectedGoal.snippet.title}</h1>
               )}
             </div>
-            <div className="mt-9">
+            <div className="">
               <Timer />
             </div>
           </div>
