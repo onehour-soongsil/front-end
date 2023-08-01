@@ -15,7 +15,7 @@ function Button({
   htmlType = "button",
   className,
 }: ButtonProps) {
-  const combinedClassName = `bg-button-color font-white ${className}`;
+  const combinedClassName = `${className}`;
   const buttonStyle = type === "ghost" ? { color: "white" } : {};
 
   return (

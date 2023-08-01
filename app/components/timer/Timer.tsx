@@ -69,13 +69,13 @@ export default function Timer() {
           </div>
           <div className="flex justify-center mt-36 space-x-20">
             <Button
-              className="bg-black w-44 h-20 font-bold text-2xl hover:bg-gray-500"
+              className="bg-black w-177 h-75  font-bold text-2xl hover:bg-gray-500"
               type="ghost"
               onClick={stopTimer}
               text="타이머 중지"
             />
             <Button
-              className="w-44 h-20 font-bold text-2xl hover:bg-red-300"
+              className="bg-button-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
               type="ghost"
               onClick={startTimer}
               text="타이머 시작"
