@@ -14,8 +14,8 @@ export default function Home() {
           더도말고 덜도말고 <br />
           하루에 딱 <span className="text-button-color">1시간</span>
         </h3>
-        <p className="leading-130 text-l text-homepage-title-color font-black">
-          원아워로 꾸준한 목표실천, 시작해봐요
+        <p className="leading-130 text-l tracking-tighter text-homepage-title-color font-black">
+          원아워로 꾸준한 목표실천, 시작해봐요!
         </p>
       </div>
       <Image
