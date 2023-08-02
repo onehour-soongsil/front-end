@@ -1,4 +1,4 @@
-import RegisterForm from "../components/auth/RegisterForm";
+import RegisterForm from "../components/auth/register/RegisterForm";
 
 export const dynamic = "force-static";
 
