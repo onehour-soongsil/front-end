@@ -1,12 +1,12 @@
 "use client";
 
 import axios from "axios";
-import { Carousel } from "antd";
+import { Carousel, Button, Space } from "antd";
 import { useEffect, useRef, useState } from "react";
+// eslint-disable-next-line import/no-absolute-path
 import goalImage from "/public/images/goalImage.png";
 import Image from "next/image";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { Button, Space } from "antd";
 import Link from "next/link";
 
 const contentStyle: React.CSSProperties = {
@@ -50,6 +50,7 @@ export default function GoalPage() {
   };
   return (
     <div
+      className="bg-red-100"
       style={{
         display: "flex",
         justifyContent: "center",
@@ -69,7 +70,7 @@ export default function GoalPage() {
         style={{ width: "500px", height: "500px", marginTop: "90px" }}
       >
         {goal.map((item, i) => (
-          <div>
+          <div key={i}>
             <Link href={`/detail/${goal[i].id.goalId}`}>
               <h3 style={contentStyle}>
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>

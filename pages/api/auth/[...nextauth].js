@@ -63,6 +63,12 @@ export const authOptions = {
       return newSession;
     },
   },
+
+  pages: {
+    signIn: "/login",
+    signOut: "/",
+  },
+
   secret: process.env.NEXT_PUBLIC_JWT_SECRET_KEY,
 };
 

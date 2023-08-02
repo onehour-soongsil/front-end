@@ -1,11 +1,13 @@
 import Side from "@/app/components/goalDetailPage/Side";
 import Main from "@/app/components/goalDetailPage/Main";
 
-export default function GoalDetailPage(props) {
+export default function GoalDetailPage(props: { params: { id: any } }) {
+  // eslint-disable-next-line react/destructuring-assignment
+  const { id } = props.params;
   console.log(props);
   return (
     <>
-      <Main goalId={props.params.id} />
+      <Main goalId={id} />
       <Side />
     </>
   );

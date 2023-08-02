@@ -21,16 +21,21 @@ export default function NavigationBar() {
         {session.status === "authenticated" ? (
           <>
             <Link href="/mypage">
-              <Button type="primary" text="마이페이지" />
+              <Button className="bg-button-color" type="primary" text="마이페이지" />
             </Link>
 
-            <Button type="primary" onClick={signOut} text="로그아웃" />
+            <Button
+              className="bg-button-color"
+              type="primary"
+              onClick={() => signOut({ callbackUrl: "/" })}
+              text="로그아웃"
+            />
           </>
         ) : (
           <>
-            <Button type="primary" onClick={signIn} text="로그인" />
+            <Button className="bg-button-color" type="primary" onClick={signIn} text="로그인" />
             <Link href="/register">
-              <Button type="primary" text="회원가입" />
+              <Button className="bg-button-color" type="primary" text="회원가입" />
             </Link>
           </>
         )}

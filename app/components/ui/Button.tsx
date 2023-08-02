@@ -5,17 +5,27 @@ interface ButtonProps {
   text: string;
   onClick?: () => void;
   htmlType?: "button" | "submit";
+  className: string;
 }
 
-function Button({ type = "default", text = "", onClick, htmlType = "button" }: ButtonProps) {
+function Button({
+  type = "default",
+  text = "",
+  onClick,
+  htmlType = "button",
+  className,
+}: ButtonProps) {
+  const combinedClassName = `${className}`;
+  const buttonStyle = type === "ghost" ? { color: "white" } : {};
+
   return (
     <AntButton
       type={type}
-      size="large"
       shape="round"
       onClick={onClick}
-      className="bg-button-color font-black"
+      className={combinedClassName}
       htmlType={htmlType}
+      style={buttonStyle}
     >
       {text}
     </AntButton>
