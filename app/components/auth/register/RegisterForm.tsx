@@ -4,9 +4,10 @@ import { Form, Input } from "antd";
 import { Content } from "antd/es/layout/layout";
 import axios from "axios";
 import Image from "next/image";
-import Logo from "../../../public/images/Logo.png";
-import Button from "../ui/Button";
-import { formItemLayout, tailFormItemLayout } from "../ui/form-layout/FormLayout";
+import { useState } from "react";
+import Logo from "../../../../public/images/Logo.png";
+import Button from "../../ui/Button";
+import { formItemLayout, tailFormItemLayout } from "./FormLayout";
 
 interface FormValues {
   email: string;
@@ -16,15 +17,28 @@ interface FormValues {
 }
 
 export default function RegisterForm() {
+  const [isSuccess, setIsSuccess] = useState();
+
   const onFinish = (values: FormValues) => {
     axios
       .post("/api/register", values)
-      .then(res => console.log(res.data))
-      .catch(err => console.error(err.response.data));
+      .then(res => {
+        setIsSuccess(res.data);
+        setTimeout(() => {
+          setIsSuccess(undefined);
+        }, 4000);
+      })
+      .catch(err => {
+        setIsSuccess(err.response.data);
+        setTimeout(() => {
+          setIsSuccess(undefined);
+        }, 4000);
+      });
   };
 
   return (
     <Content className="flex flex-col justify-center items-center h-screen">
+      {isSuccess && <h1>{isSuccess}</h1>}
       <Image src={Logo} alt="Logo" />
       <Form
         labelCol={formItemLayout.labelCol}
@@ -102,7 +116,7 @@ export default function RegisterForm() {
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={tailFormItemLayout.wrapperCol}>
-          <Button type="primary" htmlType="submit" text="등록 완료" />
+          <Button type="primary" htmlType="submit" text="등록 완료" className="bg-button-color" />
         </Form.Item>
       </Form>
     </Content>
