@@ -13,6 +13,18 @@ module.exports = {
       },
       spacing: {
         722: "722px",
+        236: "236px",
+        49: "49px",
+        61: "61px",
+        44: "44px",
+      },
+      width: {
+        177: "177px",
+        220: "220px",
+      },
+      height: {
+        "300vh": "300vh",
+        75: "75px",
       },
       lineHeight: {
         "extra-loose": "2.5",
@@ -45,6 +57,9 @@ module.exports = {
       ],
       "4xl": "2.441rem",
       "5xl": "3.052rem",
+      "9xl": "8rem",
+      "40px": "40px",
+      "28px": "28px",
     },
   },
   plugins: [],
