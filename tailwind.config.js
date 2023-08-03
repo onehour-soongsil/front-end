@@ -58,6 +58,7 @@ module.exports = {
       ],
       "4xl": "2.441rem",
       "5xl": "3.052rem",
+      "6xl": "60px",
       "9xl": "8rem",
       "40px": "40px",
       "28px": "28px",
