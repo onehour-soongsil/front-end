@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import Timer from "../timer/Timer";
 import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
+import GoalEditForm from "../goal/GoalEdit";
 
 interface SelectedGoalItemType {
   id: {
@@ -102,7 +103,17 @@ export default function Main({ goalId }: { goalId: string }) {
           </ul>
         </div>
         <div id="3" className="relative h-screen">
-          지수야 안만들고 뭐하냐
+          <GoalEditForm />
+          {/* <div>나의 설정 목표</div>
+          <div className="">
+            {selectedGoal && <h1 className="text-40px font-bold">{selectedGoal.snippet.title}</h1>}
+          </div>
+          <div>목표설명</div>
+          <div className="">
+            {selectedGoal && (
+              <h1 className="text-40px font-bold">{selectedGoal.snippet.description}</h1>
+            )}
+          </div> */}
         </div>
       </div>
     </div>
