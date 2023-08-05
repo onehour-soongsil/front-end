@@ -49,7 +49,7 @@ export default function Timer() {
 
   useEffect(() => {
     // 타이머가 1시간 이상인 경우 처리
-    if (time >= 5 && !isCompleted) {
+    if (time >= 3 && !isCompleted) {
       //5를 나중에 3600으로 바꿔야함
       handleCompletion();
     }
@@ -75,7 +75,7 @@ export default function Timer() {
               text="타이머 중지"
             />
             <Button
-              className="bg-button-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
+              className="bg-main-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
               type="ghost"
               onClick={startTimer}
               text="타이머 시작"
