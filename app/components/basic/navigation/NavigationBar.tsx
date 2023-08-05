@@ -13,19 +13,23 @@ export default function NavigationBar() {
   const session = useSession();
 
   return (
-    <Header className="flex justify-between items-center bg-white border-b-4 fixed top-0 left-0 right-0 z-10">
+    <Header className="flex justify-between items-center bg-white border-b-4 fixed top-0 left-0 right-0 z-10 py-10">
       <Link href="/">
-        <Image src={Logo} alt="logo" width={150} height={150} className="translate-y-4" />
+        <Image src={Logo} alt="logo" width={200} height={200} className="translate-y-5" />
       </Link>
       <Space>
         {session.status === "authenticated" ? (
           <>
             <Link href="/mypage">
-              <Button className="bg-button-color" type="primary" text="마이페이지" />
+              <Button
+                className="bg-main-color text-lg font-bold w-32 h-14"
+                type="primary"
+                text="마이페이지"
+              />
             </Link>
 
             <Button
-              className="bg-button-color"
+              className="bg-main-color text-lg font-bold w-32 h-14"
               type="primary"
               onClick={() => signOut({ callbackUrl: "/" })}
               text="로그아웃"
@@ -33,9 +37,18 @@ export default function NavigationBar() {
           </>
         ) : (
           <>
-            <Button className="bg-button-color" type="primary" onClick={signIn} text="로그인" />
+            <Button
+              className="bg-main-color text-lg font-bold w-32 h-14"
+              type="primary"
+              onClick={signIn}
+              text="로그인"
+            />
             <Link href="/register">
-              <Button className="bg-button-color" type="primary" text="회원가입" />
+              <Button
+                className="bg-main-color text-lg font-bold w-32 h-14"
+                type="primary"
+                text="회원가입"
+              />
             </Link>
           </>
         )}

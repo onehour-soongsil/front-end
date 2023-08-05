@@ -10,11 +10,11 @@ export default function Home() {
   return (
     <Content className="h-screen bg-white relative">
       <div className="w-722 absolute top-56 left-28">
-        <h3 className="text-3xl text-homepage-title-color">
+        <h3 className="text-7xl text-basic-black font-bold">
           더도말고 덜도말고 <br />
-          하루에 딱 <span className="text-button-color">1시간</span>
+          하루에 딱 <span className="text-main-color">1시간</span>
         </h3>
-        <p className="leading-130 text-l tracking-tighter text-homepage-title-color font-black">
+        <p className="leading-130 text-3xl tracking-tighter text-basic-black font-bold">
           원아워로 꾸준한 목표실천, 시작해봐요!
         </p>
       </div>
