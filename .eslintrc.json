@@ -26,6 +26,7 @@
     "no-useless-catch": "off",
     "react-hooks/rules-of-hooks": "error",
     "react/prop-types": "off", // PropTypes 검사 비활성화
-    "react/require-default-props": "off" // defaultProps 요구 규칙 비활성화
+    "react/require-default-props": "off", // defaultProps 요구 규칙 비활성화
+    "no-underscore-dangle": "off" // mongoDB _id에 접근하기 위해 비활성화
   }
 }

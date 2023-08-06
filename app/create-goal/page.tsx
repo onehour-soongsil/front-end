@@ -9,16 +9,25 @@ import SetDate from "../components/goal/CreateDatePicker";
 const { Option } = Select;
 
 interface FormValue {
-  title: string;
+  goalTitle: string;
+  // goalImage: string;
+  goalDescription: string;
+  dueDate: number;
+  totalGoalRounds: number;
 }
 
 export default function CreateGoalPage() {
   const [form] = Form.useForm();
   const [value, setValue] = useState<string>();
 
-  const onChange = (values: FormValue) => {
+  const onFinish = (values: FormValue) => {
+    console.log("post되는 form데이터", values);
+
     axios
-      .post("/api/create-goal", values)
+      .post("/api/create-goal", {
+        ...values,
+        isFinished: false,
+      })
       .then(res => {
         setValue(res.data);
         setTimeout(() => {
@@ -36,23 +45,23 @@ export default function CreateGoalPage() {
   const treeData = [
     {
       title: "5",
-      value: "1",
+      value: "5",
     },
     {
       title: "10",
-      value: "2",
+      value: "10",
     },
     {
       title: "15",
-      value: "2",
+      value: "15",
     },
     {
       title: "20",
-      value: "2",
+      value: "20",
     },
     {
       title: "25",
-      value: "2",
+      value: "25",
     },
   ];
 
@@ -62,7 +71,7 @@ export default function CreateGoalPage() {
         form={form}
         className="flex flex-col justify-center items-center h-screen"
         name="register"
-        onChange={onChange}
+        onFinish={onFinish}
       >
         <div className="flex flex-col items-center mt-10 mb-10">
           <p className="text-6xl font-bold">새로운 목표를 추가합니다!</p>
@@ -70,7 +79,7 @@ export default function CreateGoalPage() {
         </div>
 
         <Form.Item
-          name="goal-title"
+          name="goalTitle"
           className="w-4/6"
           label=""
           rules={[
@@ -80,12 +89,12 @@ export default function CreateGoalPage() {
             },
           ]}
         >
-          <div className="text-4xl mb-2">목표명</div>
+          {/* <div className="text-4xl mb-2">목표명</div> */}
           <Input className="" placeholder="오픽 공부 1시간" />
         </Form.Item>
 
         <Form.Item
-          name="goal-content"
+          name="goalDescription"
           className="w-4/6"
           label=""
           rules={[
@@ -95,28 +104,27 @@ export default function CreateGoalPage() {
             },
           ]}
         >
-          <div className="text-4xl mb-2">가이드라인</div>
+          {/* <div className="text-4xl mb-2">가이드라인</div> */}
           <Input placeholder="수업 복습 20분 + 녹음 및 교정 20분 + 스크립트 암기 20분" />
         </Form.Item>
 
-        <Form.Item name="count" label="" className="w-4/6">
-          <div className="text-4xl mb-2">목표횟수</div>
+        <Form.Item name="totalGoalRounds" label="" className="w-4/6">
+          {/* <div className="text-4xl mb-2">목표횟수</div> */}
           <TreeSelect
             value={value}
             dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
             treeData={treeData}
             placeholder="Please select"
             treeDefaultExpandAll
-            onChange={onChange}
           />
         </Form.Item>
 
-        <Form.Item name="due-date" label="" className="w-4/6">
-          <div className="text-4xl mb-2">기간</div>
+        <Form.Item name="dueDate" label="" className="w-4/6">
+          {/* <div className="text-4xl mb-2">기간</div> */}
           <SetDate />
         </Form.Item>
 
-        <Form.Item name="" label="" className="">
+        <Form.Item label="" className="">
           <Button type="primary" htmlType="submit" className="bg-black">
             Submit
           </Button>
