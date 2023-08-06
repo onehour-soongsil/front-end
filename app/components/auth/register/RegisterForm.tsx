@@ -116,7 +116,12 @@ export default function RegisterForm() {
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={tailFormItemLayout.wrapperCol}>
-          <Button type="primary" htmlType="submit" text="등록 완료" className="bg-button-color" />
+          <Button
+            type="primary"
+            htmlType="submit"
+            text="등록 완료"
+            className="bg-main-color text-lg font-bold w-32 h-14"
+          />
         </Form.Item>
       </Form>
     </Content>

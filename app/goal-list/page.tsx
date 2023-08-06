@@ -27,6 +27,10 @@ interface GoalItemType {
 }
 
 export default function GoalPage() {
+  // recoil data
+  // const setGoalList = useSetRecoilState(goalListState);
+  // const filteredGoalList = useRecoilValue(filteredGoalListState);
+
   const [goal, setGoal] = useState<GoalItemType[]>([]);
   const carouselRef = useRef(null);
 
