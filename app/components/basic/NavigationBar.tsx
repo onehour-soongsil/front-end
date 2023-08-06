@@ -23,11 +23,16 @@ export default function NavigationBar() {
       <Link href="/">ONE HOURS</Link>
       <Space>
         {session.status === "authenticated" ? (
-          <Button type="primary" danger onClick={signOut} text="LOGOUT" />
+          <>
+            <Link href="/mypage">마이페이지</Link>
+            <Button type="primary" danger onClick={signOut} text="LOGOUT" />
+          </>
         ) : (
-          <Button type="primary" danger={false} onClick={signIn} text="LOGIN" />
+          <>
+            <Button type="primary" danger={false} onClick={signIn} text="LOGIN" />
+            <Link href="/register">REGISTER</Link>
+          </>
         )}
-        <Link href="/register">REGISTER</Link>
       </Space>
     </Header>
   );
