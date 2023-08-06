@@ -27,6 +27,10 @@ interface GoalItemType {
 }
 
 export default function GoalPage() {
+  // recoil data
+  // const setGoalList = useSetRecoilState(goalListState);
+  // const filteredGoalList = useRecoilValue(filteredGoalListState);
+
   const [goal, setGoal] = useState<GoalItemType[]>([]);
   const carouselRef = useRef(null);
 
@@ -75,7 +79,7 @@ export default function GoalPage() {
             >
               {goal.map((item, i) => (
                 <>
-                  <div key={i}>
+                  <div key={item.id.goalId}>
                     <Link href={`/detail/${goal[i].id.goalId}`}>
                       <h3 style={contentStyle}>
                         <div>
