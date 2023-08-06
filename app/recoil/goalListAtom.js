@@ -12,10 +12,10 @@ export const filteredGoalListState = selector({
     const goalList = get(goalListState);
     const now = dayjs();
 
-    // 수정필요
-    const filteredList = goalList.find(goal => {
-      const goalDate = dayjs(goal.goalDate);
-      return goalDate.diff(now, "days") >= 1;
+    const filteredList = goalList.filter(goal => {
+      console.log(goal.dueDate);
+      const dueDate = dayjs(goal.dueDate[1]); // 포멧팅(문자열)을 다시 dayjs 객체로
+      return dueDate.diff(now, "days") + 1 >= 0;
     });
     return filteredList;
   },
