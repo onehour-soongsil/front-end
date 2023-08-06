@@ -1,0 +1,77 @@
+[
+  {
+    "userId": 123,
+    "goalId": "agklag123vjnbk",
+    "goalTitle": "영어공부하기",
+    "goalImage": "",
+    "goalDescription": "하루에 토익 문제집 20쪽씩 풀기",
+    "goalDate": {
+      "$D": 6,
+      "$H": 16,
+      "$L": "en",
+      "$M": 7,
+      "$W": 1,
+      "$d": "Mon Aug 07 2023 16:40:49 GMT+0900 (한국 표준시)",
+      "$m": 40,
+      "$ms": 690,
+      "$s": 49,
+      "$u": null,
+      "&x": {},
+      "$y": 2023
+    },
+    "totalGoalRounds": 10,
+    "nowGoalRounds": 5,
+    "goalPercentages": 50,
+    "isFinished": false
+  },
+  {
+    "userId": 123,
+    "goalId": "avadkgl1241vjnbk",
+    "goalTitle": "헬스하기",
+    "goalImage": "",
+    "goalDescription": "렛풀다운 120개 하기",
+    "goalDate": {
+      "$D": 10,
+      "$H": 16,
+      "$L": "en",
+      "$M": 7,
+      "$W": 1,
+      "$d": "Mon Aug 07 2023 16:40:49 GMT+0900 (한국 표준시)",
+      "$m": 40,
+      "$ms": 690,
+      "$s": 49,
+      "$u": null,
+      "&x": {},
+      "$y": 2023
+    },
+    "totalGoalRounds": 10,
+    "nowGoalRounds": 5,
+    "goalPercentages": 50,
+    "isFinished": false
+  },
+  {
+    "userId": 123,
+    "goalId": "agakdsfjk23gl1241vjnbk",
+    "goalTitle": "밥먹기",
+    "goalImage": "",
+    "goalDescription": "삼겹살 먹기",
+    "goalDate": {
+      "$D": 7,
+      "$H": 16,
+      "$L": "en",
+      "$M": 7,
+      "$W": 1,
+      "$d": "Mon Aug 07 2023 16:40:49 GMT+0900 (한국 표준시)",
+      "$m": 40,
+      "$ms": 690,
+      "$s": 49,
+      "$u": null,
+      "&x": {},
+      "$y": 2023
+    },
+    "totalGoalRounds": 10,
+    "nowGoalRounds": 5,
+    "goalPercentages": 50,
+    "isFinished": false
+  }
+]

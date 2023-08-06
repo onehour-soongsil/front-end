@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import NavigationBar from "./components/basic/navigation/NavigationBar";
 import GetSessionProvider from "./provider/GetSessionProvider";
+import RecoilProvider from "./recoil/RecoilProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +16,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <GetSessionProvider>
-          <nav>
-            <NavigationBar />
-          </nav>
-          <main>{children}</main>
+          <RecoilProvider>
+            <nav>
+              <NavigationBar />
+            </nav>
+            <main>{children}</main>
+          </RecoilProvider>
         </GetSessionProvider>
       </body>
     </html>
