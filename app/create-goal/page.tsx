@@ -1,12 +1,15 @@
 "use client";
 
 import axios from "axios";
-import { Button, Form, Input, Select, TreeSelect } from "antd";
+import { Button, Form, Input, Select, TreeSelect, DatePicker } from "antd";
 import React, { useState } from "react";
+import dayjs, { Dayjs } from "dayjs";
 import MyDatePicker from "../components/goal/DatePicker";
 import SetDate from "../components/goal/CreateDatePicker";
 
 const { Option } = Select;
+const { RangePicker } = DatePicker;
+type RangeValue = [Dayjs | null, Dayjs | null] | null;
 
 interface FormValue {
   goalTitle: string;
@@ -17,6 +20,25 @@ interface FormValue {
 }
 
 export default function CreateGoalPage() {
+  const [dates, setDates] = useState<RangeValue>(null);
+
+  const disabledDate = (current: Dayjs) => {
+    if (!dates) {
+      return false;
+    }
+    const tooLate = dates[0] && current.diff(dates[0], "days") >= 31;
+    const tooEarly = dates[1] && dates[1].diff(current, "days") >= 31;
+    return !!tooEarly || !!tooLate;
+  };
+
+  const onOpenChange = (open: boolean) => {
+    if (open) {
+      setDates([null, null]);
+    } else {
+      setDates(null);
+    }
+  };
+
   const [form] = Form.useForm();
   const [value, setValue] = useState<string>();
 
@@ -24,7 +46,7 @@ export default function CreateGoalPage() {
     console.log("post되는 form데이터", values);
 
     axios
-      .post("/api/create-goal", {
+      .post("/api/goal/create-goal", {
         ...values,
         isFinished: false,
       })
@@ -79,7 +101,7 @@ export default function CreateGoalPage() {
         </div>
 
         <Form.Item
-          name="goalTitle"
+          name="goalTitle"s
           className="w-4/6"
           label=""
           rules={[
@@ -121,7 +143,28 @@ export default function CreateGoalPage() {
 
         <Form.Item name="dueDate" label="" className="w-4/6">
           {/* <div className="text-4xl mb-2">기간</div> */}
-          <SetDate />
+          <RangePicker
+            className="w-full placeholder-red-500"
+            value={dates || value}
+            disabledDate={disabledDate}
+            onCalendarChange={val => {
+              setDates(val);
+            }}
+            onChange={val => {
+              if (val) {
+                const now = dayjs(); // 현재시간
+                console.log("현재", now);
+                console.log("종료시간", val[1]);
+                console.log("시작-현재", val[0]?.diff(now, "days"));
+                console.log("종료-시작", val[1]?.diff(val[0], "days"));
+                console.log("종료-현재", val[1]?.diff(now, "days"));
+
+                setValue(val);
+              }
+            }}
+            onOpenChange={onOpenChange}
+            changeOnBlur
+          />
         </Form.Item>
 
         <Form.Item label="" className="">
