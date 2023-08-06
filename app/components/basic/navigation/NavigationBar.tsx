@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Layout, Space } from "antd";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 import Logo from "../../../../public/images/Logo.png";
 
 const { Header } = Layout;

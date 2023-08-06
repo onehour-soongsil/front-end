@@ -2,12 +2,24 @@
 
 import React from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Space } from "antd";
+import { Checkbox, Form, Input, Space } from "antd";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import Button from "../components/ui/Button";
+
+interface Loginvalues {
+  email: string;
+  password: string;
+}
 
 export default function page() {
-  const onFinish = values => {
-    console.log("Received values of form: ", values);
+  const onFinish = async (values: Loginvalues) => {
+    const result = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      redirect: true,
+      callbackUrl: "/goal-list",
+    });
   };
 
   return (
@@ -47,19 +59,29 @@ export default function page() {
       >
         <Input prefix={<LockOutlined />} type="password" placeholder="Password" />
       </Form.Item>
-      <Form.Item>
+
+      {/* <Form.Item>
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
         <Link href="/">Forgot password</Link>
-      </Form.Item>
+      </Form.Item> */}
 
       <Form.Item>
         <Space size={20}>
-          <Button type="primary" htmlType="submit" className="login-form-button">
-            로그인
-          </Button>
-          <Link href="/register">회원가입</Link>
+          <Button
+            className="bg-main-color text-lg font-bold w-32 h-14"
+            type="primary"
+            text="로그인"
+            htmlType="submit"
+          />
+          <Link href="/register">
+            <Button
+              className="bg-main-color text-lg font-bold w-32 h-14"
+              type="primary"
+              text="회원가입"
+            />
+          </Link>
         </Space>
       </Form.Item>
     </Form>
