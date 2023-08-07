@@ -47,10 +47,10 @@ export default function Main({ goalId }: { goalId: string }) {
         </div>
         <div id="2" className="relative h-screen flex justify-center items-end ">
           <div className="absolute left-20 top-24">
-            <h1 className="text-40px tracking-tighter font-bold text-button-color">
+            <h1 className="text-5xl tracking-tighter font-bold text-main-color">
               꺼지지 않는 불꽃처럼
             </h1>
-            <p className="text-base font-bold leading-15 tracking-tighter text-homepage-title-color">
+            <p className="text-2xl  leading-15 tracking-tighter text-basic-black">
               목표 달성도에따라 성화가 점등됩니다
             </p>
           </div>

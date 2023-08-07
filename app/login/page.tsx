@@ -69,9 +69,18 @@ export default function page() {
 
       <Form.Item>
         <Space size={20}>
-          <Button type="primary" htmlType="submit" className="bg-button-color" text="로그인" />
+          <Button
+            className="bg-main-color text-lg font-bold w-32 h-14"
+            type="primary"
+            text="로그인"
+            htmlType="submit"
+          />
           <Link href="/register">
-            <Button type="primary" className="bg-button-color" text="회원가입" />
+            <Button
+              className="bg-main-color text-lg font-bold w-32 h-14"
+              type="primary"
+              text="회원가입"
+            />
           </Link>
         </Space>
       </Form.Item>

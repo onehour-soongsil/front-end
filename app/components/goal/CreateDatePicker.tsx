@@ -1,4 +1,4 @@
-import type { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import React, { useState } from "react";
 import { DatePicker } from "antd";
 
@@ -36,6 +36,13 @@ export default function SetDate() {
         setDates(val);
       }}
       onChange={val => {
+        const now = dayjs(); // 현재시간
+        console.log("현재", now);
+        console.log("종료시간", val[1]);
+        console.log("시작-현재", val[0]?.diff(now, "days"));
+        console.log("종료-시작", val[1]?.diff(val[0], "days"));
+        console.log("종료-현재", val[1]?.diff(now, "days"));
+
         setValue(val);
       }}
       onOpenChange={onOpenChange}
