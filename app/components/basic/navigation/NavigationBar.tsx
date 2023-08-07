@@ -13,7 +13,7 @@ export default function NavigationBar() {
   const session = useSession();
 
   return (
-    <Header className="flex justify-between items-center bg-white border-b-4 fixed top-0 left-0 right-0 z-10">
+    <Header className="flex justify-between items-center bg-white border-b-4 fixed top-0 left-0 right-0 z-10 h-20">
       <Link href="/">
         <Image src={Logo} alt="logo" width={150} height={150} className="translate-y-4" />
       </Link>
@@ -33,9 +33,14 @@ export default function NavigationBar() {
           </>
         ) : (
           <>
-            <Button className="bg-button-color" type="primary" onClick={signIn} text="로그인" />
+            <Button
+              className="bg-main-color hover:bg-red-300"
+              type="ghost"
+              onClick={signIn}
+              text="로그인"
+            />
             <Link href="/register">
-              <Button className="bg-button-color" type="primary" text="회원가입" />
+              <Button className="bg-main-color hover:bg-red-300" type="ghost" text="회원가입" />
             </Link>
           </>
         )}
