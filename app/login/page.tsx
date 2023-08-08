@@ -5,7 +5,10 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Checkbox, Form, Input, Space } from "antd";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { Content } from "antd/es/layout/layout";
+import Image from "next/image";
 import Button from "../components/ui/Button";
+import Logo from "../../public/images/Logo.png";
 
 interface Loginvalues {
   email: string;
@@ -24,6 +27,7 @@ export default function page() {
 
   return (
     <Form
+      className="bg-cover bg-center"
       name="normal_login"
       initialValues={{
         remember: true,
@@ -35,8 +39,10 @@ export default function page() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        backgroundImage: "url('/images/background.png')",
       }}
     >
+      <Image src={Logo} alt="Logo" width={200} height={200} />
       <Form.Item
         name="email"
         rules={[
