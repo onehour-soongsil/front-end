@@ -1,24 +1,21 @@
 import dayjs from "dayjs";
 import { atom, selector } from "recoil";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-
-dayjs.extend(isSameOrAfter);
-
-const now = dayjs();
 
 export const goalListState = atom({
   key: "goalListState",
   default: [],
 });
 
-export const filteredGoalListSelector = selector({
-  key: "filteredGoalListSelector",
+export const filteredGoalListState = selector({
+  key: "filteredGoalListState",
   get: ({ get }) => {
     const goalList = get(goalListState);
+    const now = dayjs();
+
     const filteredList = goalList.filter(goal => {
-      const [start, due] = goal.dueDate;
-      const startDate = dayjs(start);
-      return now.isSameOrAfter(startDate);
+      console.log(goal.dueDate);
+      const dueDate = dayjs(goal.dueDate[1]); // 포멧팅(문자열)을 다시 dayjs 객체로
+      return dueDate.diff(now, "days") + 1 >= 0;
     });
     return filteredList;
   },
