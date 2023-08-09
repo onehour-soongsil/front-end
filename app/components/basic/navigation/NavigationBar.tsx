@@ -13,7 +13,7 @@ export default function NavigationBar() {
   const session = useSession();
 
   return (
-    <Header className="flex justify-between items-center bg-white border-b-4 fixed top-0 left-0 right-0 z-10 py-10">
+    <Header className="flex justify-between items-center bg-white border-b-4 py-10">
       <Link href="/">
         <Image src={Logo} alt="logo" width={200} height={200} className="translate-y-5" />
       </Link>
