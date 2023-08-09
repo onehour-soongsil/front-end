@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav>
               <NavigationBar />
             </nav>
-            <main className="h-screen flex justify-center items-center">{children}</main>
+            <main className="h-screen">{children}</main>
           </RecoilProvider>
         </GetSessionProvider>
       </body>
