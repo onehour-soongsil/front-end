@@ -10,8 +10,12 @@ import torchAnimation from "../../../public/data/torch-animation.json";
 import GoalEditForm from "../goal/GoalEdit";
 
 interface SelectedGoalItemType {
-  id: string;
-  goalTitle: string;
+  id: {
+    goalId: string;
+  };
+  snippet: {
+    title: string;
+  };
 }
 
 export default function Main({ goalId }: { goalId: string }) {
@@ -34,7 +38,7 @@ export default function Main({ goalId }: { goalId: string }) {
         <div id="1" className="relative h-screen">
           <div className="flex items-center flex-col">
             <div className="mt-48">
-              {selectedGoal && <h1 className="text-5xl font-bold">{selectedGoal.goalTitle}</h1>}
+              {selectedGoal && <h1 className="text-5xl font-bold">{selectedGoal.snippet.title}</h1>}
             </div>
             <div className="">
               <Timer />
