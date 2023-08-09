@@ -1,22 +1,104 @@
 import dayjs from "dayjs";
 import { atom, selector } from "recoil";
+import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
+
+dayjs.extend(isSameOrAfter);
+
+const now = dayjs();
 
 export const goalListState = atom({
-  key: "goalListState",
+  key: "goalListStateKey",
   default: [],
 });
 
-export const filteredGoalListState = selector({
-  key: "filteredGoalListState",
+// 할당량을 전부 채운 목표들
+export const finishedGoalListState = selector({
+  key: "finishedGoalListStateKey",
   get: ({ get }) => {
     const goalList = get(goalListState);
-    const now = dayjs();
-
-    const filteredList = goalList.filter(goal => {
-      console.log(goal.dueDate);
-      const dueDate = dayjs(goal.dueDate[1]); // 포멧팅(문자열)을 다시 dayjs 객체로
-      return dueDate.diff(now, "days") + 1 >= 0;
+    const finishedGoalList = goalList.filter(goal => {
+      return goal.isFinished === true;
     });
-    return filteredList;
+
+    return finishedGoalList;
+  },
+});
+
+// 만료시간이 지난 데이터
+export const closedGoalListState = selector({
+  key: "closedGoalListStateKey",
+  get: ({ get }) => {
+    const goalList = get(goalListState);
+
+    const closedGoalList = goalList.filter(goal => {
+      const [start, due] = goal.dueDate;
+      const dueDate = dayjs(due);
+      return dueDate.isBefore(now);
+    });
+
+    return closedGoalList;
+  },
+});
+
+// 만료시간이 지났고, 할당량을 못채운 목표들
+export const failGoalListState = selector({
+  key: "failGoalListStateKey",
+  get: ({ get }) => {
+    const closedList = get(closedGoalListState);
+    const finishedList = get(finishedGoalListState);
+
+    const failGoalList = closedList.filter(goal => {
+      return !finishedList.includes(goal);
+    });
+
+    return failGoalList;
+  },
+});
+
+// 만료시간이 남은 목표들
+export const openGoalListState = selector({
+  key: "openGoalListStateKey",
+  get: ({ get }) => {
+    const goalList = get(goalListState);
+    const closedGoalList = get(closedGoalListState);
+
+    const notClosedGoalList = goalList.filter(goal => {
+      return !closedGoalList.includes(goal);
+    });
+
+    const openGoalList = notClosedGoalList.filter(goal => {
+      return goal.isFinished === false;
+    });
+
+    return openGoalList;
+  },
+});
+
+// 만료시간이 남았고, 진행중인 목표들
+export const startingGoalListState = selector({
+  key: "startingGoalListStateKey",
+  get: ({ get }) => {
+    const openList = get(openGoalListState);
+    const startingGoalList = openList.filter(goal => {
+      const [start, due] = goal.dueDate;
+      const startDate = dayjs(start);
+      return now.isSameOrAfter(startDate);
+    });
+
+    return startingGoalList;
+  },
+});
+
+// 만료시간이 남았고, 아직 시작날짜가 되지 않은 목표들
+export const notStartedGoalListState = selector({
+  key: "notStartedGoalListStateKey",
+  get: ({ get }) => {
+    const openList = get(openGoalListState);
+    const startingGoalList = get(startingGoalListState);
+    const notStartedGoalList = openList.filter(goal => {
+      return !startingGoalList.includes(goal);
+    });
+
+    return notStartedGoalList;
   },
 });
