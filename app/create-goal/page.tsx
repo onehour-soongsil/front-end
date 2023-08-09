@@ -46,11 +46,11 @@ export default function CreateGoalPage() {
   const [value, setValue] = useState<string>();
 
   const onFinish = (values: FormValue) => {
-    console.log("post되는 form데이터", values);
-
     axios
       .post("/api/goal/create-goal", {
         ...values,
+        nowGoalRounds: 0,
+        goalPercentages: 0,
         isFinished: false,
       })
       .then(res => {
@@ -106,7 +106,6 @@ export default function CreateGoalPage() {
 
         <Form.Item
           name="goalTitle"
-          s
           className="w-4/6"
           label=""
           rules={[
@@ -157,13 +156,6 @@ export default function CreateGoalPage() {
             }}
             onChange={val => {
               if (val) {
-                const now = dayjs(); // 현재시간
-                console.log("현재", now);
-                console.log("종료시간", val[1]);
-                console.log("시작-현재", val[0]?.diff(now, "days"));
-                console.log("종료-시작", val[1]?.diff(val[0], "days"));
-                console.log("종료-현재", val[1]?.diff(now, "days"));
-
                 setValue(val);
               }
             }}

@@ -9,7 +9,7 @@ const { Content } = Layout;
 export default function Home() {
   return (
     <Content className="h-screen bg-white relative">
-      <div className="w-722 absolute top-56 left-28">
+      <div className="w-722 absolute top-56 left-28 z-10">
         <h3 className="text-7xl text-basic-black font-bold">
           더도말고 덜도말고 <br />
           하루에 딱 <span className="text-main-color">1시간</span>
