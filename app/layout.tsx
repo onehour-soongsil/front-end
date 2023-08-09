@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav>
               <NavigationBar />
             </nav>
-            <main>{children}</main>
+            <main className="h-screen">{children}</main>
           </RecoilProvider>
         </GetSessionProvider>
       </body>
