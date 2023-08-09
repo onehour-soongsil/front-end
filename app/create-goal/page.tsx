@@ -6,6 +6,8 @@ import React, { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import MyDatePicker from "../components/goal/DatePicker";
 import SetDate from "../components/goal/CreateDatePicker";
+import { useSetRecoilState } from "recoil";
+import { goalListState } from "../recoil/goalListAtom";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -21,6 +23,7 @@ interface FormValue {
 
 export default function CreateGoalPage() {
   const [dates, setDates] = useState<RangeValue>(null);
+  const setGoalList = useSetRecoilState(goalListState);
 
   const disabledDate = (current: Dayjs) => {
     if (!dates) {
@@ -52,6 +55,7 @@ export default function CreateGoalPage() {
       })
       .then(res => {
         setValue(res.data);
+        setGoalList(prevGoals => [...prevGoals, res.data]);
         setTimeout(() => {
           setValue(undefined);
         }, 4000);
@@ -101,7 +105,8 @@ export default function CreateGoalPage() {
         </div>
 
         <Form.Item
-          name="goalTitle"s
+          name="goalTitle"
+          s
           className="w-4/6"
           label=""
           rules={[

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Layout, Space } from "antd";
 import { signIn, signOut, useSession } from "next-auth/react";
-import Button from "../ui/Button";
+import Button from "../../ui/Button";
 
 const { Header } = Layout;
 
