@@ -49,7 +49,7 @@ export default function Timer() {
 
   useEffect(() => {
     // 타이머가 1시간 이상인 경우 처리
-    if (time >= 3 && !isCompleted) {
+    if (time >= 5 && !isCompleted) {
       //5를 나중에 3600으로 바꿔야함
       handleCompletion();
     }
