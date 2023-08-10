@@ -8,7 +8,6 @@ export default function GoalListProvider({ allGoalList, children }) {
   const [goalList, setGoalList] = useRecoilState(goalListState);
 
   useEffect(() => {
-    console.log("모든 목표들", allGoalList);
     setGoalList(allGoalList);
   }, [allGoalList]);
 

@@ -9,7 +9,7 @@ async function getAllGoalList() {
   const res = await fetch(`http://localhost:3000/api/goal/show-goalList`, {
     next: { revalidate: 15 },
   });
-  const data = res.json();
+  const data = await res.json();
   return data;
 }
 

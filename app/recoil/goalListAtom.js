@@ -31,9 +31,12 @@ export const closedGoalListState = selector({
     const goalList = get(goalListState);
 
     const closedGoalList = goalList.filter(goal => {
-      const [start, due] = goal.dueDate;
-      const dueDate = dayjs(due);
-      return dueDate.isBefore(now);
+      if (goal.dueDate) {
+        const [, due] = goal.dueDate;
+        const dueDate = dayjs(due);
+        return dueDate.isBefore(now);
+      }
+      return false;
     });
 
     return closedGoalList;
@@ -80,9 +83,12 @@ export const startingGoalListState = selector({
   get: ({ get }) => {
     const openList = get(openGoalListState);
     const startingGoalList = openList.filter(goal => {
-      const [start, due] = goal.dueDate;
-      const startDate = dayjs(start);
-      return now.isSameOrAfter(startDate);
+      if (goal.dueDate) {
+        const [start] = goal.dueDate;
+        const startDate = dayjs(start);
+        return now.isSameOrAfter(startDate);
+      }
+      return false;
     });
 
     return startingGoalList;

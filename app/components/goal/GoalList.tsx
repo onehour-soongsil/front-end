@@ -10,7 +10,7 @@ import goalImage from "/public/images/goalImage.png";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../ui/Button";
-import { startingGoalListState } from "../../recoil/goalListAtom";
+import { closedGoalListState, startingGoalListState } from "../../recoil/goalListAtom";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -29,7 +29,7 @@ export default function GoalPage() {
   const [goals, setGoals] = useState<GoalItemType[]>([]);
   const carouselRef = useRef(null);
   const startingGoalList = useRecoilValue(startingGoalListState);
-  console.log(startingGoalList);
+
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
