@@ -2,35 +2,31 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import Timer from "../timer/Timer";
 import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
 import GoalEditForm from "../goal/GoalEdit";
+import { startingGoalListState } from "@/app/recoil/goalListAtom";
 
 interface SelectedGoalItemType {
-  id: {
-    goalId: string;
-  };
-  snippet: {
-    title: string;
-  };
+  _id: string;
+  goalTitle: string;
 }
 
-export default function Main({ goalId }: { goalId: string }) {
-  const [selectedGoal, setSelectedGoal] = useState<SelectedGoalItemType[]>();
+export default function Main({ _id }: { _id: string }) {
+  const [selectedGoal, setSelectedGoal] = useState<SelectedGoalItemType[]>([]);
+  const startingGoalList = useRecoilValue(startingGoalListState);
+
   useEffect(() => {
-    axios.get("/data/goal.json").then(res => {
-      const selected = res.data.items.find(
-        (item: SelectedGoalItemType) => item.id.goalId === goalId
-      );
-      if (selected) {
-        setSelectedGoal(selected);
-        console.log(selected);
-      }
-    });
-  }, [goalId]);
+    const selected = startingGoalList.find(goal => goal._id === _id);
+    console.log("selected", selected);
+    if (selected) {
+      setSelectedGoal(selected);
+    }
+  }, [_id]);
 
   return (
     <div className="absolute w-full overflow-hidden">
@@ -38,7 +34,7 @@ export default function Main({ goalId }: { goalId: string }) {
         <div id="1" className="relative h-screen">
           <div className="flex items-center flex-col">
             <div className="mt-48">
-              {selectedGoal && <h1 className="text-5xl font-bold">{selectedGoal.snippet.title}</h1>}
+              <h1 className="text-5xl font-bold">{selectedGoal.goalTitle}</h1>
             </div>
             <div className="">
               <Timer />
@@ -57,14 +53,24 @@ export default function Main({ goalId }: { goalId: string }) {
           <ul className="flex items-center">
             <li className="relative flex flex-col items-center">
               <Lottie
-                className="w-24 absolute -top-28"
+                className={`w-${
+                  selectedGoal.goalPercentages === 0
+                    ? 0
+                    : selectedGoal.goalPercentages <= 30
+                    ? 24
+                    : selectedGoal.goalPercentages <= 60
+                    ? 36
+                    : selectedGoal.goalPercentages < 100
+                    ? 40
+                    : 48
+                } absolute -top-40`}
                 animationData={torchAnimation}
                 loop
                 autoplay
               />
-              <Image className="" src={trophy} alt="torch" width={200} height={400} />
+              <Image className="z-10" src={trophy} alt="torch" width={400} height={400} />
             </li>
-            <li className="relative flex flex-col items-center">
+            {/* <li className="relative flex flex-col items-center">
               <Lottie
                 className="w-36 absolute -top-40"
                 animationData={torchAnimation}
@@ -81,25 +87,7 @@ export default function Main({ goalId }: { goalId: string }) {
                 autoplay
               />
               <Image className="" src={trophy} alt="torch" width={400} height={400} />
-            </li>
-            <li className="relative flex flex-col items-center">
-              <Lottie
-                className="w-36 absolute -top-40"
-                animationData={torchAnimation}
-                loop
-                autoplay
-              />
-              <Image className="" src={trophy} alt="torch" width={300} height={400} />
-            </li>
-            <li className="relative flex flex-col items-center">
-              <Lottie
-                className="w-24 absolute -top-28"
-                animationData={torchAnimation}
-                loop
-                autoplay
-              />
-              <Image className="" src={trophy} alt="torch" width={200} height={400} />
-            </li>
+            </li> */}
           </ul>
         </div>
         <div id="3" className="relative h-screen">

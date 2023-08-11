@@ -1,114 +1,37 @@
-"use client";
+import { getServerSession } from "next-auth";
+import { headers } from "next/headers";
+import GoalList from "../components/goal/GoalList";
+import GoalListProvider from "../components/GoalListProvider";
+import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
-import axios from "axios";
-import { Carousel, Space, ConfigProvider } from "antd";
-import { useEffect, useRef, useState } from "react";
-// eslint-disable-next-line import/no-absolute-path
-import goalImage from "/public/images/goalImage.png";
-import Image from "next/image";
-import Link from "next/link";
-import Button from "../components/ui/Button";
+export const dynamic = "force-dynamic";
 
-const contentStyle: React.CSSProperties = {
-  margin: 0,
-  height: "400px",
-  color: "#000",
-  textAlign: "center",
-  // background: "#364d79",
-};
-
-interface GoalItemType {
-  id: {
-    goalId: string;
-  };
-  snippet: {
-    title: string;
-  };
+async function getAllGoalList() {
+  const res = await fetch(`http://localhost:3000/api/goal/show-goalList`, {
+    method: "GET",
+    headers: headers(),
+    next: { revalidate: 15 },
+  });
+  const data = await res.json();
+  return data;
 }
 
-export default function GoalPage() {
-  // recoil data
-  // const setGoalList = useSetRecoilState(goalListState);
-  // const filteredGoalList = useRecoilValue(filteredGoalListState);
+export default async function GoalListPage() {
+  const data = await getAllGoalList();
+  const session = await getServerSession(authOptions);
 
-  const [goal, setGoal] = useState<GoalItemType[]>([]);
-  const carouselRef = useRef(null);
-
-  useEffect(() => {
-    axios.get(`/data/goal.json`).then(res => {
-      if (res.data.items && res.data.items.length > 0) {
-        setGoal(res.data.items);
-      }
-    });
-  }, [setGoal]);
-
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
-
-  const goToPrevSlide = () => {
-    carouselRef.current.prev();
-  };
-  const goToNextSlide = () => {
-    carouselRef.current.next();
-  };
-
+  if (session) {
+    return (
+      <>
+        <GoalListProvider allGoalList={data}>
+          <GoalList />
+        </GoalListProvider>
+      </>
+    );
+  }
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Carousel: {
-            dotWidth: 10,
-            dotHeight: 10,
-            dotActiveWidth: 20,
-          },
-        },
-      }}
-    >
-      <div className="h-screen overflow-hidden">
-        <div className="flex justify-center mt-36 font-bold text-6xl">목표를 선택해볼까요?</div>
-        <div className="flex justify-center">
-          <div className="mt-48 mr-11">
-            <Button className="bg-main-color" type="ghost" onClick={goToPrevSlide} text="<" />
-          </div>
-          <div className="mt-11">
-            <Carousel
-              afterChange={onChange}
-              ref={carouselRef}
-              style={{ width: "330px", height: "380px" }}
-            >
-              {goal.map((item, i) => (
-                <>
-                  <div key={item.id.goalId}>
-                    <Link href={`/detail/${goal[i].id.goalId}`}>
-                      <h3 style={contentStyle}>
-                        <div>
-                          <Image src={goalImage} alt="image1" width="400" height="400" />
-                        </div>
-                        {goal.length > 0 && (
-                          <span className="font-bold text-3xl">{goal[i].snippet.title}</span>
-                        )}
-                      </h3>
-                    </Link>
-                  </div>
-                  <div className="flex justify-center">
-                    <Link href={`/detail/${goal[i].id.goalId}`}>
-                      <Button
-                        className="bg-main-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
-                        type="ghost"
-                        text="목표 시작"
-                      />
-                    </Link>
-                  </div>
-                </>
-              ))}
-            </Carousel>
-          </div>
-          <div className="mt-48 ml-11">
-            <Button className="bg-main-color" type="ghost" onClick={goToNextSlide} text=">" />
-          </div>
-        </div>
-      </div>
-    </ConfigProvider>
+    <>
+      <h1>로그인 없이 접근할 생각하지도 마라</h1>
+    </>
   );
 }

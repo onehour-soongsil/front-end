@@ -1,11 +1,10 @@
 "use client";
 
 import axios from "axios";
-import { Button, Form, Input, Select, TreeSelect, DatePicker } from "antd";
+import { Button, Form, Input, Select, TreeSelect, DatePicker, Modal } from "antd";
 import React, { useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
-import MyDatePicker from "../components/goal/DatePicker";
-import SetDate from "../components/goal/CreateDatePicker";
+import { Dayjs } from "dayjs";
+import { useRouter } from "next/navigation";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -20,7 +19,18 @@ interface FormValue {
 }
 
 export default function CreateGoalPage() {
+  const router = useRouter();
   const [dates, setDates] = useState<RangeValue>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+    router.push("/");
+  };
 
   const disabledDate = (current: Dayjs) => {
     if (!dates) {
@@ -43,11 +53,11 @@ export default function CreateGoalPage() {
   const [value, setValue] = useState<string>();
 
   const onFinish = (values: FormValue) => {
-    console.log("post되는 form데이터", values);
-
     axios
       .post("/api/goal/create-goal", {
         ...values,
+        nowGoalRounds: 0,
+        goalPercentages: 0,
         isFinished: false,
       })
       .then(res => {
@@ -62,28 +72,33 @@ export default function CreateGoalPage() {
           setValue(undefined);
         }, 4000);
       });
+    showModal();
   };
 
   const treeData = [
     {
       title: "5",
-      value: "5",
+      value: 5,
     },
     {
       title: "10",
-      value: "10",
+      value: 10,
     },
     {
       title: "15",
-      value: "15",
+      value: 15,
     },
     {
       title: "20",
-      value: "20",
+      value: 20,
     },
     {
       title: "25",
-      value: "25",
+      value: 25,
+    },
+    {
+      title: "30",
+      value: 30,
     },
   ];
 
@@ -99,80 +114,87 @@ export default function CreateGoalPage() {
           <p className="text-6xl font-bold">새로운 목표를 추가합니다!</p>
           <p className="text-2xl">목표를 달성하기 위한 가이드라인을 작성해주세요.</p>
         </div>
+        <div className="w-4/6">
+          <div className="text-3xl mb-2 font-bold">목표명</div>
+          <Form.Item
+            name="goalTitle"
+            label=""
+            rules={[
+              {
+                required: true,
+                message: "목표명을 입력해주세요",
+              },
+            ]}
+          >
+            <Input className="" placeholder="오픽 공부 1시간" />
+          </Form.Item>
+        </div>
 
-        <Form.Item
-          name="goalTitle"
-          s
-          className="w-4/6"
-          label=""
-          rules={[
-            {
-              required: true,
-              message: "목표명을 입력해주세요",
-            },
-          ]}
-        >
-          {/* <div className="text-4xl mb-2">목표명</div> */}
-          <Input className="" placeholder="오픽 공부 1시간" />
-        </Form.Item>
+        <div className="w-4/6">
+          <div className="text-3xl mb-2 font-bold">가이드라인</div>
+          <Form.Item
+            name="goalDescription"
+            label=""
+            rules={[
+              {
+                required: true,
+                message: "구체적인 실행 방법을 적어주세요",
+              },
+            ]}
+          >
+            <Input placeholder="수업 복습 20분 + 녹음 및 교정 20분 + 스크립트 암기 20분" />
+          </Form.Item>
+        </div>
 
-        <Form.Item
-          name="goalDescription"
-          className="w-4/6"
-          label=""
-          rules={[
-            {
-              required: true,
-              message: "구체적인 실행 방법을 적어주세요",
-            },
-          ]}
-        >
-          {/* <div className="text-4xl mb-2">가이드라인</div> */}
-          <Input placeholder="수업 복습 20분 + 녹음 및 교정 20분 + 스크립트 암기 20분" />
-        </Form.Item>
-
-        <Form.Item name="totalGoalRounds" label="" className="w-4/6">
-          {/* <div className="text-4xl mb-2">목표횟수</div> */}
-          <TreeSelect
-            value={value}
-            dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
-            treeData={treeData}
-            placeholder="Please select"
-            treeDefaultExpandAll
-          />
-        </Form.Item>
-
-        <Form.Item name="dueDate" label="" className="w-4/6">
-          {/* <div className="text-4xl mb-2">기간</div> */}
-          <RangePicker
-            className="w-full placeholder-red-500"
-            value={dates || value}
-            disabledDate={disabledDate}
-            onCalendarChange={val => {
-              setDates(val);
-            }}
-            onChange={val => {
-              if (val) {
-                const now = dayjs(); // 현재시간
-                console.log("현재", now);
-                console.log("종료시간", val[1]);
-                console.log("시작-현재", val[0]?.diff(now, "days"));
-                console.log("종료-시작", val[1]?.diff(val[0], "days"));
-                console.log("종료-현재", val[1]?.diff(now, "days"));
-
-                setValue(val);
-              }
-            }}
-            onOpenChange={onOpenChange}
-            changeOnBlur
-          />
-        </Form.Item>
+        <div className="w-4/6">
+          <div className="text-3xl mb-2 font-bold">목표횟수</div>
+          <Form.Item name="totalGoalRounds" label="">
+            <TreeSelect
+              value={value}
+              dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
+              treeData={treeData}
+              placeholder="다섯 번 단위로 목표횟수를 선택할 수 있어요"
+              treeDefaultExpandAll
+            />
+          </Form.Item>
+        </div>
+        <div className="w-4/6 placeholder-red-500">
+          <div className="text-3xl mb-2 font-bold">기간</div>
+          <Form.Item name="dueDate" label="">
+            <RangePicker
+              className="w-full"
+              value={dates || value}
+              disabledDate={disabledDate}
+              onCalendarChange={val => {
+                setDates(val);
+              }}
+              onChange={val => {
+                if (val) {
+                  setValue(val);
+                }
+              }}
+              onOpenChange={onOpenChange}
+              changeOnBlur
+            />
+          </Form.Item>
+        </div>
 
         <Form.Item label="" className="">
-          <Button type="primary" htmlType="submit" className="bg-black">
-            Submit
+          <Button type="primary" htmlType="submit" className="bg-main-color">
+            저장하기
           </Button>
         </Form.Item>
+        <Modal
+          cancelText="취소"
+          okText="등록하기"
+          className=""
+          title="목표 등록 완료"
+          visible={isModalVisible}
+          onOk={handleOk}
+          onCancel={handleOk}
+        >
+          <p>당신의 도전을 응원할게요!</p>
+        </Modal>
       </Form>
     </div>
   );

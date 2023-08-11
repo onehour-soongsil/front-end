@@ -37,7 +37,10 @@ export default function RegisterForm() {
   };
 
   return (
-    <Content className="flex flex-col justify-center items-center h-screen">
+    <Content
+      className="flex flex-col justify-center items-center h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/images/background.png')" }}
+    >
       {isSuccess && <h1>{isSuccess}</h1>}
       <Image src={Logo} alt="Logo" />
       <Form

@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import { connectDatabase, findUserByEmail } from "../../../helper/db-utils";
+import { findUserByEmail } from "../../../helper/db-utils";
 
 export const authOptions = {
   providers: [
@@ -69,7 +69,7 @@ export const authOptions = {
     signOut: "/",
   },
 
-  secret: process.env.NEXT_PUBLIC_JWT_SECRET_KEY,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);

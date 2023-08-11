@@ -7,7 +7,7 @@ export default function GoalDetailPage(props: { params: { id: any } }) {
   console.log(props);
   return (
     <>
-      <Main goalId={id} />
+      <Main _id={id} />
       <Side />
     </>
   );
