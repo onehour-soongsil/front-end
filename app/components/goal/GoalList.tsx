@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useSetRecoilState } from "recoil";
 import Button from "../ui/Button";
 import { goalListState } from "@/app/recoil/goalListAtom";
+import NoGoalList from "./NoGoalList";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -46,7 +47,7 @@ export default function GoalPage({ startingGoalList }) {
   if (startingGoalList.length === 0) {
     return (
       <>
-        <h1>등록된 목표가 없습니다!</h1>
+        <NoGoalList />
       </>
     );
   }
