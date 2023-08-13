@@ -69,7 +69,7 @@ export const authOptions = {
     signOut: "/",
   },
 
-  secret: process.env.NEXT_PUBLIC_JWT_SECRET_KEY,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
