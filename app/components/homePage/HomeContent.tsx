@@ -12,7 +12,6 @@ const { Content } = Layout;
 export default function Home() {
   const session = useSession();
   const router = useRouter();
-  console.log(session);
 
   return (
     <Content className="h-screen bg-white relative">

@@ -1,4 +1,4 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 export async function connectDatabase() {
   try {
@@ -44,18 +44,18 @@ export async function getGoalList() {
   return goalList;
 }
 
-// export async function getSelectedDocuments(collection, postId) {
-//   const client = await connectDatabase();
-//   const db = client.db();
-//   const result = await db.collection(collection).findOne({ _id: new ObjectId(postId) });
+export async function getSelectedGoalData(postId) {
+  const client = await connectDatabase();
+  const db = client.db();
+  const result = await db.collection("goal-list").findOne({ _id: new ObjectId(postId) });
 
-//   if (result) {
-//     result._id = result._id.toString();
-//   }
+  if (result) {
+    result._id = result._id.toString();
+  }
 
-//   client.close();
-//   return result;
-// }
+  client.close();
+  return result;
+}
 
 // // edit
 // export async function replaceDocument(collection, selectedPostId, editPost) {
