@@ -1,11 +1,9 @@
-import { getServerSession } from "next-auth";
 import { headers } from "next/headers";
 import GoalList from "../components/goal/GoalList";
-import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
 export const dynamic = "force-dynamic";
 
-async function getAllGoalList() {
+async function getStartingGoalList() {
   const res = await fetch(`http://localhost:3000/api/goal/show-goalList`, {
     method: "GET",
     headers: headers(),
@@ -16,15 +14,7 @@ async function getAllGoalList() {
 }
 
 export default async function GoalListPage() {
-  const data = await getAllGoalList();
-  const session = await getServerSession(authOptions);
+  const data = await getStartingGoalList();
 
-  if (session) {
-    return <GoalList startingGoalList={data} />;
-  }
-  return (
-    <>
-      <h1>로그인 없이 접근할 생각하지도 마라</h1>
-    </>
-  );
+  return <GoalList data={data} />;
 }
