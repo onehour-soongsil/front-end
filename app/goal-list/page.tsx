@@ -1,12 +1,14 @@
 import { getServerSession } from "next-auth";
+import { headers } from "next/headers";
 import GoalList from "../components/goal/GoalList";
-import GoalListProvider from "../components/GoalListProvider";
 import { authOptions } from "../../pages/api/auth/[...nextauth]";
 
 export const dynamic = "force-dynamic";
 
 async function getAllGoalList() {
   const res = await fetch(`http://localhost:3000/api/goal/show-goalList`, {
+    method: "GET",
+    headers: headers(),
     next: { revalidate: 15 },
   });
   const data = await res.json();
@@ -18,13 +20,7 @@ export default async function GoalListPage() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    return (
-      <>
-        <GoalListProvider allGoalList={data}>
-          <GoalList />
-        </GoalListProvider>
-      </>
-    );
+    return <GoalList startingGoalList={data} />;
   }
   return (
     <>

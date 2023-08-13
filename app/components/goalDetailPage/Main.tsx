@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useRecoilValue } from "recoil";
 import Image from "next/image";
 import Lottie from "lottie-react";
@@ -9,7 +8,7 @@ import Timer from "../timer/Timer";
 import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
 import GoalEditForm from "../goal/GoalEdit";
-import { startingGoalListState } from "@/app/recoil/goalListAtom";
+import { goalListState } from "@/app/recoil/goalListAtom";
 
 interface SelectedGoalItemType {
   _id: string;
@@ -18,11 +17,10 @@ interface SelectedGoalItemType {
 
 export default function Main({ _id }: { _id: string }) {
   const [selectedGoal, setSelectedGoal] = useState<SelectedGoalItemType[]>([]);
-  const startingGoalList = useRecoilValue(startingGoalListState);
+  const startingGoalList = useRecoilValue(goalListState);
 
   useEffect(() => {
     const selected = startingGoalList.find(goal => goal._id === _id);
-    console.log("selected", selected);
     if (selected) {
       setSelectedGoal(selected);
     }
