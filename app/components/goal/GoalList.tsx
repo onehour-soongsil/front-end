@@ -1,12 +1,12 @@
 "use client";
 
 import { Carousel, ConfigProvider } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 // eslint-disable-next-line import/no-absolute-path
 import goalImage from "/public/images/goalImage.png";
 import Image from "next/image";
 import Link from "next/link";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import Button from "../ui/Button";
 import { goalListState } from "@/app/recoil/goalListAtom";
 import NoGoalList from "./NoGoalList";
@@ -19,19 +19,13 @@ const contentStyle: React.CSSProperties = {
   // background: "#364d79",
 };
 
-interface GoalItemType {
-  _id: string;
-  goalTitle: string;
-}
-
-export default function GoalPage({ startingGoalList }) {
-  const [goals, setGoals] = useState<GoalItemType[]>([]);
+export default function GoalPage({ data }) {
   const carouselRef = useRef(null);
-  const setStartingGoalList = useSetRecoilState(goalListState);
+  const [startingGoalList, setStartingGoalList] = useRecoilState(goalListState);
 
   useEffect(() => {
-    setStartingGoalList(startingGoalList);
-  }, [startingGoalList]);
+    setStartingGoalList(data);
+  }, [data]);
 
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
@@ -45,11 +39,7 @@ export default function GoalPage({ startingGoalList }) {
   };
 
   if (startingGoalList.length === 0) {
-    return (
-      <>
-        <NoGoalList />
-      </>
-    );
+    return <NoGoalList />;
   }
 
   return (
