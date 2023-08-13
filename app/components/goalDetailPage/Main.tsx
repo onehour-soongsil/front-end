@@ -18,11 +18,12 @@ export default function Main({ _id }: { _id: string }) {
   const [selectedGoal, setSelectedGoal] = useState<SelectedGoalItemType[]>([]);
 
   useEffect(() => {
-    axios.get("/api/goal/show-goalList").then(res => {
-      const startingGoalList = res.data;
-      const selected = startingGoalList.find(goal => goal._id === _id);
-      setSelectedGoal(selected);
-    });
+    axios
+      .get(`/api/goal/${_id}`) //
+      .then(res => {
+        setSelectedGoal(res.data);
+      })
+      .catch(err => console.error(err));
   }, [_id]);
 
   if (selectedGoal.length === 0) return <h1>로딩중...</h1>;
