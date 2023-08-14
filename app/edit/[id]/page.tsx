@@ -80,7 +80,7 @@ export default function Edit(props: { params: { id: any } }) {
 
   const onFinish = (values: FormValue) => {
     axios
-      .post("/api/goal/edit-goal", {
+      .post(`/api/goal/edit/${id}`, {
         ...values,
         nowGoalRounds: 0,
         goalPercentages: 0,

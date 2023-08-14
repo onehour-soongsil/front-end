@@ -1,9 +1,9 @@
 import { getToken } from "next-auth/jwt";
-import { replaceDocument, getSelectedGoalData } from "../../../helper/db-utils";
+import { replaceDocument, getSelectedGoalData } from "../../../../helper/db-utils";
 
 export default async function handler(req, res) {
-  const selectedGoalId = req.query.showGoalDetail;
-  console.log("selectedGoalId:", selectedGoalId);
+  const { editGoalId } = req.query;
+  console.log("editGoalId:", editGoalId);
   if (req.method === "POST") {
     try {
       const token = await getToken({ req });
@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         email: token.user.email,
       };
 
-      const result = await replaceDocument("goal-list", selectedGoalId, goalData);
+      const result = await replaceDocument("goal-list", editGoalId, goalData);
       if (!result) {
         throw new Error("데이터를 DB에 저장하는데 실패했습니다...");
       }
