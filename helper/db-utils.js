@@ -57,17 +57,17 @@ export async function getSelectedGoalData(postId) {
   return result;
 }
 
-// // edit
-// export async function replaceDocument(collection, selectedPostId, editPost) {
-//   const client = await connectDatabase();
-//   const db = client.db();
-//   const result = await db
-//     .collection(collection)
-//     .updateOne({ _id: new ObjectId(selectedPostId) }, { $set: editPost });
+// edit
+export async function replaceDocument(collection, selectedPostId, editPost) {
+  const client = await connectDatabase();
+  const db = client.db();
+  const result = await db
+    .collection(collection)
+    .updateOne({ _id: new ObjectId(selectedPostId) }, { $set: editPost });
 
-//   client.close();
-//   return result;
-// }
+  client.close();
+  return result;
+}
 
 // // delete
 // export async function deleteSelectedDocument(collection, selectedPostId) {

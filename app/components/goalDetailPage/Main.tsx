@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import axios from "axios";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import Timer from "../timer/Timer";
 import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
@@ -114,17 +116,7 @@ export default function Main({ _id }: { _id: string }) {
             </ul>
           </div>
           <div id="3" className="relative h-screen">
-            <GoalEditForm />
-            {/* <div>나의 설정 목표</div>
-            <div className="">
-              {selectedGoal && <h1 className="text-40px font-bold">{selectedGoal.snippet.title}</h1>}
-            </div>
-            <div>목표설명</div>
-            <div className="">
-              {selectedGoal && (
-                <h1 className="text-40px font-bold">{selectedGoal.snippet.description}</h1>
-              )}
-            </div> */}
+            <Link href={`/edit/${_id}`}>편집하기</Link>
           </div>
         </div>
       </div>
