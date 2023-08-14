@@ -7,9 +7,10 @@ import goalImage from "/public/images/goalImage.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
+import { Router } from "next/router";
 import Button from "../ui/Button";
 import { goalListState } from "@/app/recoil/goalListAtom";
-import NoDataPage from "@/app/no-data/page";
+import NoGoalList from "./NoGoalList";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
@@ -27,6 +28,27 @@ export default function GoalPage({ data }) {
     setStartingGoalList(data);
   }, [data]);
 
+  useEffect(() => {
+    const now = new Date();
+    // const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const oneMinuteLater = new Date(now.getTime() + 10000); // 10초 후의 시간 (테스트용)
+    const timeUntilMidnight = oneMinuteLater - now;
+
+    const timer = setTimeout(() => {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("key_")) {
+          localStorage.removeItem(key);
+        }
+      }
+      window.location.reload();
+    }, timeUntilMidnight);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
@@ -39,7 +61,7 @@ export default function GoalPage({ data }) {
   };
 
   if (startingGoalList.length === 0) {
-    return <NoDataPage />;
+    return <NoGoalList />;
   }
 
   return (

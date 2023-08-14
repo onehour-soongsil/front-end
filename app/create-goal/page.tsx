@@ -29,7 +29,7 @@ export default function CreateGoalPage() {
 
   const handleOk = () => {
     setIsModalVisible(false);
-    router.push("/");
+    router.push("/goal-list");
   };
 
   const disabledDate = (current: Dayjs) => {

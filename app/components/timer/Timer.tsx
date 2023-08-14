@@ -4,9 +4,11 @@ import { useState, useEffect } from "react";
 import Button from "../ui/Button";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 
-export default function Timer() {
+export default function Timer(props) {
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [canStartTimer, setCanStartTimer] = useState(true);
+  const { _id } = props.selectedGoal;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -22,6 +24,8 @@ export default function Timer() {
 
   const startTimer = () => {
     setIsRunning(true);
+    const today = new Date().toISOString().substring(0, 10);
+    localStorage.setItem(`key_${_id}`, today);
   };
 
   const stopTimer = () => {
@@ -40,7 +44,7 @@ export default function Timer() {
 
   // 타이머가 1시간 이상인지를 저장하는 상태 변수 추가
   const [isCompleted, setIsCompleted] = useState(false);
-
+  const [isCompletedToday, setIsCompletedToday] = useState(false);
   // 타이머가 1시간 이상일 때 임무 완수 처리하는 함수
   const handleCompletion = () => {
     setIsCompleted(true);
@@ -48,16 +52,20 @@ export default function Timer() {
   };
 
   useEffect(() => {
-    // 타이머가 1시간 이상인 경우 처리
-    if (time >= 3 && !isCompleted) {
-      // 5를 나중에 3600으로 바꿔야함
+    if (time >= 5 && !isCompleted) {
       handleCompletion();
     }
   }, [time, isCompleted]);
 
+  useEffect(() => {
+    if (localStorage.getItem(`key_${_id}`)) {
+      setIsCompletedToday(true);
+    }
+  }, []);
+
   return (
     <div className="">
-      {isCompleted ? (
+      {isCompleted || isCompletedToday ? (
         <FinishTodaysGoal />
       ) : (
         <>
