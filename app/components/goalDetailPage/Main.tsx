@@ -8,6 +8,7 @@ import Timer from "../timer/Timer";
 import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
 import GoalEditForm from "../goal/GoalEdit";
+import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 
 interface SelectedGoalItemType {
   _id: string;
@@ -38,7 +39,7 @@ export default function Main({ _id }: { _id: string }) {
                 <h1 className="text-5xl font-bold">{selectedGoal.goalTitle}</h1>
               </div>
               <div className="">
-                <Timer />
+                <Timer selectedGoal={selectedGoal} />
               </div>
             </div>
           </div>

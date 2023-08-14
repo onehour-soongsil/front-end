@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Button from "../ui/Button";
 import { Empty } from "antd";
+import Button from "../ui/Button";
 
 export default function NoGoalList() {
   return (
