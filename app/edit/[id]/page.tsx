@@ -221,7 +221,7 @@ export default function Edit(props: { params: { id: any } }) {
             onOk={handleOk}
             onCancel={handleOk}
           >
-            <p>당신의 도전을 응원할게요!</p>
+            <p>목표가 수정되었습니다!</p>
           </Modal>
         </Form>
       </div>

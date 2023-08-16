@@ -1,9 +1,9 @@
 import { getToken } from "next-auth/jwt";
-import { replaceDocument, getSelectedGoalData } from "../../../../helper/db-utils";
+import { replaceDocument } from "../../../../helper/db-utils";
 
 export default async function handler(req, res) {
   const { editGoalId } = req.query;
-  console.log("editGoalId:", editGoalId);
+
   if (req.method === "POST") {
     try {
       const token = await getToken({ req });
