@@ -28,27 +28,6 @@ export default function GoalPage({ data }) {
     setStartingGoalList(data);
   }, [data]);
 
-  useEffect(() => {
-    const now = new Date();
-    // const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    const oneMinuteLater = new Date(now.getTime() + 10000); // 10초 후의 시간 (테스트용)
-    const timeUntilMidnight = oneMinuteLater - now;
-
-    const timer = setTimeout(() => {
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key.startsWith("key_")) {
-          localStorage.removeItem(key);
-        }
-      }
-      window.location.reload();
-    }, timeUntilMidnight);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
-
   const onChange = (currentSlide: number) => {
     console.log(currentSlide);
   };
@@ -77,7 +56,7 @@ export default function GoalPage({ data }) {
       }}
     >
       <div className="h-screen overflow-hidden">
-        <div className="flex justify-center mt-36 font-bold text-6xl">목표를 선택해볼까요?</div>
+        <div className="flex justify-center mt-16 font-bold text-6xl">목표를 선택해볼까요?</div>
         <div className="flex justify-center">
           <div className="mt-48 mr-11">
             <Button className="bg-main-color" type="ghost" onClick={goToPrevSlide} text="<" />

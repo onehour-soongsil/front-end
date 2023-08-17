@@ -5,10 +5,10 @@ import Button from "../ui/Button";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 
 export default function Timer(props) {
+  const { _id } = props.selectedGoal;
   const [time, setTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [canStartTimer, setCanStartTimer] = useState(true);
-  const { _id } = props.selectedGoal;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
