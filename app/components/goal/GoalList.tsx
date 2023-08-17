@@ -56,7 +56,7 @@ export default function GoalPage({ data }) {
       }}
     >
       <div className="h-screen overflow-hidden">
-        <div className="flex justify-center mt-36 font-bold text-6xl">목표를 선택해볼까요?</div>
+        <div className="flex justify-center mt-16 font-bold text-6xl">목표를 선택해볼까요?</div>
         <div className="flex justify-center">
           <div className="mt-48 mr-11">
             <Button className="bg-main-color" type="ghost" onClick={goToPrevSlide} text="<" />
