@@ -29,6 +29,27 @@ export default function Main({ _id }: { _id: string }) {
       .catch(err => console.error(err));
   }, [_id]);
 
+  useEffect(() => {
+    const now = new Date();
+    // const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const oneMinuteLater = new Date(now.getTime() + 10000); // 1분 후의 시간 (테스트용)
+    const timeUntilMidnight = oneMinuteLater - now;
+
+    const timer = setTimeout(() => {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("key_")) {
+          localStorage.removeItem(key);
+        }
+      }
+      // window.location.reload();
+    }, timeUntilMidnight);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  });
+
   if (selectedGoal.length === 0) return <h1>로딩중...</h1>;
 
   if (selectedGoal.length !== 0) {
