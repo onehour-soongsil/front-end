@@ -11,6 +11,7 @@ import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
 import GoalEditForm from "../goal/GoalEdit";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
+import edit from "@/public/images/edit.jpg";
 
 interface SelectedGoalItemType {
   _id: string;
@@ -136,8 +137,27 @@ export default function Main({ _id }: { _id: string }) {
               </li> */}
             </ul>
           </div>
-          <div id="3" className="relative h-screen">
-            <Link href={`/edit/${_id}`}>편집하기</Link>
+          <div id="3" className="relative h-screen w-full flex flex-col justify-center">
+            <div className="">
+              <div className="flex justify-center items-center">
+                <Image
+                  src={edit}
+                  alt="edit icon"
+                  width={200}
+                  height={200}
+                  className="flex flex-row justify-center mt-8"
+                />
+              </div>
+              <p className="flex flex-row justify-center py-3 text-gray-500">
+                너무 잦은 계획 변동은 좋지 않아요!
+              </p>
+              <Link
+                className="text-3xl flex flex-row justify-center font-bold"
+                href={`/edit/${_id}`}
+              >
+                목표 수정하기
+              </Link>
+            </div>
           </div>
         </div>
       </div>
