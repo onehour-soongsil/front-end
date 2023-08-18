@@ -69,13 +69,13 @@ export async function replaceDocument(collection, selectedPostId, editPost) {
   return result;
 }
 
-// // delete
-// export async function deleteSelectedDocument(collection, selectedPostId) {
-//   const client = await connectDatabase();
-//   const db = client.db();
+// delete
+export async function deleteSelectedDocument(collection, selectedPostId) {
+  const client = await connectDatabase();
+  const db = client.db();
 
-//   const result = await db.collection(collection).deleteOne({ _id: new ObjectId(selectedPostId) });
+  const result = await db.collection(collection).deleteOne({ _id: new ObjectId(selectedPostId) });
 
-//   client.close();
-//   return result;
-// }
+  client.close();
+  return result;
+}
