@@ -3,11 +3,9 @@
 import { Carousel, ConfigProvider } from "antd";
 import { useEffect, useRef } from "react";
 // eslint-disable-next-line import/no-absolute-path
-import goalImage from "/public/images/goalImage.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
-import { Router } from "next/router";
 import Button from "../ui/Button";
 import { goalListState } from "@/app/recoil/goalListAtom";
 import NoGoalList from "./NoGoalList";
@@ -17,7 +15,6 @@ const contentStyle: React.CSSProperties = {
   height: "400px",
   color: "#000",
   textAlign: "center",
-  // background: "#364d79",
 };
 
 export default function GoalPage({ data }) {
@@ -74,7 +71,7 @@ export default function GoalPage({ data }) {
                       <Link href={`/detail/${goal._id}`}>
                         <h3 style={contentStyle}>
                           <div>
-                            <Image src={goalImage} alt="image1" width="400" height="400" />
+                            <Image src={goal.goalImage} alt="image1" width="400" height="400" />
                           </div>
                           <span className="font-bold text-3xl">{goal.goalTitle}</span>
                         </h3>

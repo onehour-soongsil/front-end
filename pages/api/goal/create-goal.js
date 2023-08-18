@@ -15,9 +15,9 @@ export default async function handler(req, res) {
       };
       const result = await insertDocument("goal-list", goalData);
       if (!result) {
-        throw new Error("데이터를 DB에 저장하는데 실패했습니다...");
+        throw new Error("목표저장에 실패했습니다...😢");
       }
-      res.status(200).json(result);
+      res.status(200).json({ message: "목표저장에 성공했습니다!", result });
     } catch (err) {
       res.status(500).json(err.message);
     }
