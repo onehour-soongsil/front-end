@@ -101,6 +101,17 @@ export default function Edit(props: { params: { id: any } }) {
     showModal();
   };
 
+  const handleDelete = () => {
+    axios
+      .delete(`/api/goal/delete/${id}`)
+      .then(() => {
+        router.push("/");
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+
   // 목표 횟수 선택값
   const treeData = [
     {
@@ -142,8 +153,7 @@ export default function Edit(props: { params: { id: any } }) {
           initialValues={initialValues}
         >
           <div className="flex flex-col items-center mt-10 mb-10">
-            <p className="text-6xl font-bold">새로운 목표를 추가합니다!</p>
-            <p className="text-2xl">목표를 달성하기 위한 가이드라인을 작성해주세요.</p>
+            <p className="text-6xl font-bold">목표를 수정합니다.</p>
           </div>
           <div className="w-4/6">
             <div className="text-3xl mb-2 font-bold">목표명</div>
@@ -207,19 +217,39 @@ export default function Edit(props: { params: { id: any } }) {
               />
             </Form.Item>
           </div>
-          <Form.Item label="" className="">
-            <Button type="primary" htmlType="submit" className="bg-main-color">
+          <Form.Item label="" className="flex">
+            <Button type="primary" onClick={handleDelete} className="bg-gray-700 mx-4">
+              삭제하기
+            </Button>
+
+            <Button type="primary" htmlType="submit" className="bg-main-color mx-4">
               저장하기
             </Button>
           </Form.Item>
           <Modal
             cancelText="취소"
-            okText="등록하기"
+            okText="확인"
             className=""
             title="목표 등록 완료"
             visible={isModalVisible}
             onOk={handleOk}
             onCancel={handleOk}
+            okButtonProps={{
+              style: {
+                backgroundColor: "red",
+                borderColor: "white",
+                color: "white",
+                transition: "none",
+              },
+              onMouseOver: e => {
+                e.currentTarget.style.backgroundColor = "red";
+                e.currentTarget.style.borderColor = "red";
+              },
+              onMouseOut: e => {
+                e.currentTarget.style.backgroundColor = "red";
+                e.currentTarget.style.borderColor = "red";
+              },
+            }}
           >
             <p>목표가 수정되었습니다!</p>
           </Modal>
