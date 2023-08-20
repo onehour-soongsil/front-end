@@ -1,0 +1,16 @@
+.imgList {
+  display: flex;
+}
+
+.imgList img {
+  width: 10rem;
+}
+
+.imgList img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* button::after {
+    display: none;
+  } */
