@@ -5,6 +5,7 @@ import { Button, Form, Input, Select, TreeSelect, DatePicker, Modal } from "antd
 import { useState, useEffect } from "react";
 import { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
+import styles from "./page.module.css";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -28,26 +29,26 @@ export default function Edit(props: { params: { id: any } }) {
   // eslint-disable-next-line react/destructuring-assignment
   const { id } = props.params;
   const [selectedGoal, setSelectedGoal] = useState<SelectedGoalItemType[]>([]);
-  console.log(selectedGoal);
   const initialValues = {
     goalDescription: selectedGoal.goalDescription,
     goalTitle: selectedGoal.goalTitle,
     totalGoalRounds: selectedGoal.totalGoalRounds,
   };
+  const router = useRouter();
+  const [dates, setDates] = useState<RangeValue>(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [image, setImage] = useState();
 
   useEffect(() => {
     axios
       .get(`/api/goal/${id}`) //
       .then(res => {
+        setImage(res.data.goalImage);
         setSelectedGoal(res.data);
       })
       .catch(err => console.error(err));
   }, [id]);
   // eslint-disable-next-line react/destructuring-assignment
-
-  const router = useRouter();
-  const [dates, setDates] = useState<RangeValue>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -75,16 +76,19 @@ export default function Edit(props: { params: { id: any } }) {
     }
   };
 
+  const handleImage = e => setImage(e.target.getAttribute("src"));
+
   const [form] = Form.useForm();
   const [value, setValue] = useState<string>();
 
   const onFinish = (values: FormValue) => {
     axios
-      .post("/api/goal/edit-goal", {
+      .post(`/api/goal/edit/${id}`, {
         ...values,
         nowGoalRounds: 0,
         goalPercentages: 0,
         isFinished: false,
+        goalImage: image,
       })
       .then(res => {
         setValue(res.data);
@@ -99,6 +103,17 @@ export default function Edit(props: { params: { id: any } }) {
         }, 4000);
       });
     showModal();
+  };
+
+  const handleDelete = () => {
+    axios
+      .delete(`/api/goal/delete/${id}`)
+      .then(() => {
+        router.push("/");
+      })
+      .catch(err => {
+        console.error(err);
+      });
   };
 
   // 목표 횟수 선택값
@@ -142,8 +157,7 @@ export default function Edit(props: { params: { id: any } }) {
           initialValues={initialValues}
         >
           <div className="flex flex-col items-center mt-10 mb-10">
-            <p className="text-6xl font-bold">새로운 목표를 추가합니다!</p>
-            <p className="text-2xl">목표를 달성하기 위한 가이드라인을 작성해주세요.</p>
+            <p className="text-6xl font-bold">목표를 수정합니다.</p>
           </div>
           <div className="w-4/6">
             <div className="text-3xl mb-2 font-bold">목표명</div>
@@ -207,21 +221,55 @@ export default function Edit(props: { params: { id: any } }) {
               />
             </Form.Item>
           </div>
-          <Form.Item label="" className="">
-            <Button type="primary" htmlType="submit" className="bg-main-color">
+          <div className="w-4/6">
+            <div className="text-3xl mb-2 font-bold">이미지 선택</div>
+            <ul className={styles.imgList} onClick={handleImage} role="presentation">
+              <li>
+                <img src="/images/babel.png" alt="" />
+              </li>
+              <li>
+                <img src="/images/books.png" alt="" />
+              </li>
+              <li>
+                <img src="/images/goalImage.png" alt="" />
+              </li>
+            </ul>
+          </div>
+          <Form.Item label="" className="flex">
+            <Button type="primary" onClick={handleDelete} className="bg-gray-700 mx-4">
+              삭제하기
+            </Button>
+
+            <Button type="primary" htmlType="submit" className="bg-main-color mx-4">
               저장하기
             </Button>
           </Form.Item>
           <Modal
             cancelText="취소"
-            okText="등록하기"
+            okText="확인"
             className=""
             title="목표 등록 완료"
-            visible={isModalVisible}
+            open={isModalVisible}
             onOk={handleOk}
             onCancel={handleOk}
+            okButtonProps={{
+              style: {
+                backgroundColor: "red",
+                borderColor: "white",
+                color: "white",
+                transition: "none",
+              },
+              onMouseOver: e => {
+                e.currentTarget.style.backgroundColor = "red";
+                e.currentTarget.style.borderColor = "red";
+              },
+              onMouseOut: e => {
+                e.currentTarget.style.backgroundColor = "red";
+                e.currentTarget.style.borderColor = "red";
+              },
+            }}
           >
-            <p>당신의 도전을 응원할게요!</p>
+            <p>목표가 수정되었습니다!</p>
           </Modal>
         </Form>
       </div>
