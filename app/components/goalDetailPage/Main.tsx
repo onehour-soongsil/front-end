@@ -32,7 +32,7 @@ export default function Main({ _id }: { _id: string }) {
   useEffect(() => {
     const now = new Date();
     // const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-    const oneMinuteLater = new Date(now.getTime() + 10000); // 1분 후의 시간 (테스트용)
+    const oneMinuteLater = new Date(now.getTime() + 20000); // 20초 후의 시간 (테스트용)
     const timeUntilMidnight = oneMinuteLater - now;
 
     const timer = setTimeout(() => {
@@ -58,7 +58,7 @@ export default function Main({ _id }: { _id: string }) {
         <div className="h-300vh">
           <div id="1" className="relative h-screen">
             <div className="flex items-center flex-col">
-              <div className="mt-48">
+              <div className="mt-24">
                 <h1 className="text-5xl font-bold">{selectedGoal.goalTitle}</h1>
               </div>
               <div className="">

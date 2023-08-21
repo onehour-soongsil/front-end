@@ -7,29 +7,42 @@ import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 export default function Timer(props) {
   const { _id } = props.selectedGoal;
   const [time, setTime] = useState(0);
+  const [duringStopTime, setDuringStopTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [canStartTimer, setCanStartTimer] = useState(true);
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompletedToday, setIsCompletedToday] = useState(false);
+  const [lastStopTime, setLastStopTime] = useState(0);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval;
 
     if (isRunning) {
       interval = setInterval(() => {
         setTime(prevTime => prevTime + 1);
       }, 1000);
+    } else {
+      interval = setInterval(() => {
+        setDuringStopTime(prevTime => prevTime + 1);
+      }, 1000);
+
+      if (duringStopTime >= 1200) {
+        // duringStopTime이 5 이상이 되면 타이머 초기화
+        setTime(0);
+        setDuringStopTime(0);
+      }
     }
 
     return () => clearInterval(interval);
-  }, [isRunning]);
+  }, [isRunning, duringStopTime]);
 
   const startTimer = () => {
     setIsRunning(true);
-    const today = new Date().toISOString().substring(0, 10);
-    localStorage.setItem(`key_${_id}`, today);
+    setLastStopTime(0);
   };
 
   const stopTimer = () => {
     setIsRunning(false);
+    setLastStopTime(Date.now());
   };
 
   const formatTime = (times: number) => {
@@ -42,17 +55,26 @@ export default function Timer(props) {
       .padStart(2, "0")}`;
   };
 
-  // 타이머가 1시간 이상인지를 저장하는 상태 변수 추가
-  const [isCompleted, setIsCompleted] = useState(false);
-  const [isCompletedToday, setIsCompletedToday] = useState(false);
+  useEffect(() => {
+    const elapsedSinceStop = Date.now() - lastStopTime;
+    if (!isRunning && elapsedSinceStop >= 1200000) {
+      // 5초
+      setTime(0); // 5초 이상 경과 시 타이머 초기화
+      setDuringStopTime(0);
+      console.log("time : ", time);
+    }
+  }, [isRunning, lastStopTime]);
+
   // 타이머가 1시간 이상일 때 임무 완수 처리하는 함수
   const handleCompletion = () => {
     setIsCompleted(true);
     stopTimer(); // stopTimer 함수 실행
+    const today = new Date().toISOString().substring(0, 10);
+    localStorage.setItem(`key_${_id}`, today);
   };
 
   useEffect(() => {
-    if (time >= 5 && !isCompleted) {
+    if (time >= 3600 && !isCompleted) {
       handleCompletion();
     }
   }, [time, isCompleted]);
