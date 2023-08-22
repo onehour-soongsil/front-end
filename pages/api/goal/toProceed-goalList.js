@@ -1,11 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import dayjs from "dayjs";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import { getGoalList } from "../../../helper/db-utils";
-
-dayjs.extend(isSameOrAfter);
-dayjs.extend(isSameOrBefore);
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
@@ -20,17 +15,14 @@ export default async function handler(req, res) {
         return goal.email === token.user.email;
       });
 
-      const startingGoalList = filteredListByUser.filter(goal => {
+      const toProceedGoalList = filteredListByUser.filter(goal => {
         const now = dayjs();
-        const [start, due] = goal.dueDate;
+        const [start] = goal.dueDate;
         const startDate = dayjs(start);
-        const dueDate = dayjs(due);
-        return (
-          now.isSameOrAfter(startDate) && now.isSameOrBefore(dueDate) && goal.isFinished === false
-        );
+        return now.isBefore(startDate);
       });
 
-      res.status(200).json(startingGoalList);
+      res.status(200).json(toProceedGoalList);
     } catch (error) {
       res.status(500).json(error.message);
     }

@@ -7,6 +7,7 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { Content } from "antd/es/layout/layout";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Button from "../components/ui/Button";
 import Logo from "../../public/images/Logo.png";
 
@@ -15,14 +16,21 @@ interface Loginvalues {
   password: string;
 }
 
-export default function page() {
+export default function Page() {
+  const router = useRouter();
+
   const onFinish = async (values: Loginvalues) => {
     const result = await signIn("credentials", {
       email: values.email,
       password: values.password,
-      redirect: true,
-      callbackUrl: "/goal-list",
+      redirect: false,
     });
+
+    if (result.status === 401) {
+      alert("아이디 혹은 비밀번호가 일치하지 않습니다!");
+    } else {
+      router.push("/");
+    }
   };
 
   return (

@@ -13,7 +13,7 @@ export default async function handler(req, res) {
       req.body.password = hash;
       req.body.confirm = hash;
       await insertDocument("users", req.body);
-      res.status(200).json("성공!");
+      res.status(200).json("가입에 성공했습니다!");
     } catch (error) {
       res.status(400).json(error.message);
     }
