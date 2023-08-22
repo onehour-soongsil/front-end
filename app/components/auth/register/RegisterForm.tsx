@@ -1,6 +1,6 @@
 "use client";
 
-import { Form, Input, Modal } from "antd";
+import { Form, Input } from "antd";
 import { Content } from "antd/es/layout/layout";
 import axios from "axios";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Logo from "../../../../public/images/Logo.png";
 import Button from "../../ui/Button";
 import { formItemLayout, tailFormItemLayout } from "./FormLayout";
+import ModalComponent from "../../ui/modal/Modal";
 
 interface FormValues {
   email: string;
@@ -44,30 +45,7 @@ export default function RegisterForm() {
       className="flex flex-col justify-center items-center h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/images/background.png')" }}
     >
-      <Modal
-        title="알림"
-        open={isSuccess}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okButtonProps={{
-          style: {
-            backgroundColor: "red",
-            borderColor: "white",
-            color: "white",
-            transition: "none",
-          },
-          onMouseOver: e => {
-            e.currentTarget.style.backgroundColor = "red";
-            e.currentTarget.style.borderColor = "red";
-          },
-          onMouseOut: e => {
-            e.currentTarget.style.backgroundColor = "red";
-            e.currentTarget.style.borderColor = "red";
-          },
-        }}
-      >
-        {isSuccess && <p>{isSuccess}</p>}
-      </Modal>
+      <ModalComponent title="알림" open={isSuccess} onOk={handleOk} onCancel={handleCancel} />
       <Image src={Logo} alt="Logo" />
       <Form
         labelCol={formItemLayout.labelCol}

@@ -79,3 +79,13 @@ export async function deleteSelectedDocument(collection, selectedPostId) {
   client.close();
   return result;
 }
+
+export async function deleteUser(collection, email) {
+  const client = await connectDatabase();
+  const db = client.db();
+
+  const result = await db.collection(collection).deleteOne({ email });
+
+  client.close();
+  return result;
+}

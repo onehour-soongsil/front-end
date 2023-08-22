@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Button from "../components/ui/Button";
 import Logo from "../../public/images/Logo.png";
+import ModalComponent from "../components/ui/modal/Modal";
 
 interface Loginvalues {
   email: string;
@@ -29,7 +30,7 @@ export default function Page() {
     if (result.status === 401) {
       setErrorMessage("아이디 혹은 비밀번호가 일치하지 않습니다!");
     } else {
-      router.push("/");
+      router.replace("/");
     }
   };
 
@@ -42,30 +43,7 @@ export default function Page() {
 
   return (
     <>
-      <Modal
-        title="오류"
-        open={errorMessage}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        okButtonProps={{
-          style: {
-            backgroundColor: "red",
-            borderColor: "white",
-            color: "white",
-            transition: "none",
-          },
-          onMouseOver: e => {
-            e.currentTarget.style.backgroundColor = "red";
-            e.currentTarget.style.borderColor = "red";
-          },
-          onMouseOut: e => {
-            e.currentTarget.style.backgroundColor = "red";
-            e.currentTarget.style.borderColor = "red";
-          },
-        }}
-      >
-        {errorMessage && <p>{errorMessage}</p>}
-      </Modal>
+      <ModalComponent title="오류" open={errorMessage} onOk={handleOk} onCancel={handleCancel} />
       <Form
         className="bg-cover bg-center"
         name="normal_login"

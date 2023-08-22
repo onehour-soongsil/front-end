@@ -47,6 +47,7 @@ export const authOptions = {
         newToken.user = {};
         newToken.user.nickname = user.nickname;
         newToken.user.email = user.email;
+        newToken.user.image = user.image;
       }
 
       return newToken;

@@ -17,12 +17,12 @@ const contentStyle: React.CSSProperties = {
   textAlign: "center",
 };
 
-export default function GoalPage({ data }) {
+export default function GoalPage({ data, type }) {
   const carouselRef = useRef(null);
-  const [startingGoalList, setStartingGoalList] = useRecoilState(goalListState);
+  const [goalList, setGoalList] = useRecoilState(goalListState);
 
   useEffect(() => {
-    setStartingGoalList(data);
+    setGoalList(data);
   }, [data]);
 
   const onChange = (currentSlide: number) => {
@@ -36,7 +36,7 @@ export default function GoalPage({ data }) {
     carouselRef.current.next();
   };
 
-  if (startingGoalList.length === 0) {
+  if (goalList.length === 0) {
     return <NoGoalList />;
   }
 
@@ -53,7 +53,9 @@ export default function GoalPage({ data }) {
       }}
     >
       <div className="h-screen overflow-hidden">
-        <div className="flex justify-center mt-16 font-bold text-6xl">목표를 선택해볼까요?</div>
+        <div className="flex justify-center mt-16 font-bold text-6xl">
+          {type === "starting" ? "목표를 선택해볼까요?" : "진행예정인 목표입니다"}
+        </div>
         <div className="flex justify-center">
           <div className="mt-48 mr-11">
             <Button className="bg-main-color" type="ghost" onClick={goToPrevSlide} text="<" />
@@ -64,10 +66,10 @@ export default function GoalPage({ data }) {
               ref={carouselRef}
               style={{ width: "330px", height: "380px" }}
             >
-              {startingGoalList &&
-                startingGoalList.map(goal => (
-                  <>
-                    <div key={goal._id}>
+              {goalList &&
+                goalList.map(goal => (
+                  <div key={goal._id}>
+                    <div>
                       <Link href={`/detail/${goal._id}`}>
                         <h3 style={contentStyle}>
                           <div>
@@ -86,7 +88,7 @@ export default function GoalPage({ data }) {
                         />
                       </Link>
                     </div>
-                  </>
+                  </div>
                 ))}
             </Carousel>
           </div>
