@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Button from "../ui/Button";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 
@@ -66,9 +67,18 @@ export default function Timer(props) {
   }, [isRunning, lastStopTime]);
 
   // 타이머가 1시간 이상일 때 임무 완수 처리하는 함수
-  const handleCompletion = () => {
+  const handleCompletion = async () => {
     setIsCompleted(true);
     stopTimer(); // stopTimer 함수 실행
+
+    // API 요청으로 nowGoalRounds 증가시키기
+    try {
+      await axios.put(`/api/goals/${_id}`, { nowGoalRounds: 1 });
+      console.log("nowGoalRounds 증가 성공");
+    } catch (error) {
+      console.error("nowGoalRounds 증가 실패", error);
+    }
+
     const today = new Date().toISOString().substring(0, 10);
     localStorage.setItem(`key_${_id}`, today);
   };
