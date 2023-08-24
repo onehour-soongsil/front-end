@@ -12,8 +12,8 @@ export default async function handler(req, res) {
       const hash = await bcrypt.hash(req.body.password, 10);
       req.body.password = hash;
       req.body.confirm = hash;
-      await insertDocument("users", req.body);
-      res.status(200).json("성공!");
+      await insertDocument("users", { ...req.body, image: "/images/basic-avatar.png" });
+      res.status(200).json("가입에 성공했습니다!");
     } catch (error) {
       res.status(400).json(error.message);
     }

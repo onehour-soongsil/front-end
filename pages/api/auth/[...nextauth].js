@@ -17,13 +17,11 @@ export const authOptions = {
       async authorize(credentials, req) {
         const user = await findUserByEmail(credentials.email);
         if (!user) {
-          console.log("계정이 존재하지 않습니다.");
-          return null;
+          throw new Error("계정이 존재하지 않습니다.");
         }
         const pwcheck = await bcrypt.compare(credentials.password, user.password);
         if (!pwcheck) {
-          console.log("비밀번호가 틀렸습니다.");
-          return null;
+          throw new Error("비밀번호가 일치하지 않습니다.");
         }
 
         return user;
@@ -49,6 +47,7 @@ export const authOptions = {
         newToken.user = {};
         newToken.user.nickname = user.nickname;
         newToken.user.email = user.email;
+        newToken.user.image = user.image;
       }
 
       return newToken;

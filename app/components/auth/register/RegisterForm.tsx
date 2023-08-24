@@ -5,9 +5,11 @@ import { Content } from "antd/es/layout/layout";
 import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Logo from "../../../../public/images/Logo.png";
 import Button from "../../ui/Button";
 import { formItemLayout, tailFormItemLayout } from "./FormLayout";
+import ModalComponent from "../../ui/modal/Modal";
 
 interface FormValues {
   email: string;
@@ -17,22 +19,24 @@ interface FormValues {
 }
 
 export default function RegisterForm() {
+  const router = useRouter();
   const [isSuccess, setIsSuccess] = useState();
+
+  const handleOk = () => {
+    router.push("/login");
+  };
+  const handleCancel = () => {
+    setIsSuccess(undefined);
+  };
 
   const onFinish = (values: FormValues) => {
     axios
       .post("/api/register", values)
       .then(res => {
         setIsSuccess(res.data);
-        setTimeout(() => {
-          setIsSuccess(undefined);
-        }, 4000);
       })
       .catch(err => {
         setIsSuccess(err.response.data);
-        setTimeout(() => {
-          setIsSuccess(undefined);
-        }, 4000);
       });
   };
 
@@ -41,7 +45,7 @@ export default function RegisterForm() {
       className="flex flex-col justify-center items-center h-screen bg-cover bg-center"
       style={{ backgroundImage: "url('/images/background.png')" }}
     >
-      {isSuccess && <h1>{isSuccess}</h1>}
+      <ModalComponent title="알림" open={isSuccess} onOk={handleOk} onCancel={handleCancel} />
       <Image src={Logo} alt="Logo" />
       <Form
         labelCol={formItemLayout.labelCol}

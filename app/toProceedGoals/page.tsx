@@ -4,7 +4,7 @@ import GoalList from "../components/goal/GoalList";
 export const dynamic = "force-dynamic";
 
 async function getStartingGoalList() {
-  const res = await fetch(`http://localhost:3000/api/goal/show-goalList`, {
+  const res = await fetch(`http://localhost:3000/api/goal/toProceed-goalList`, {
     method: "GET",
     headers: headers(),
     next: { revalidate: 15 },
@@ -16,5 +16,5 @@ async function getStartingGoalList() {
 export default async function GoalListPage() {
   const data = await getStartingGoalList();
 
-  return <GoalList data={data} type="starting" />;
+  return <GoalList data={data} type="toProceed" />;
 }
