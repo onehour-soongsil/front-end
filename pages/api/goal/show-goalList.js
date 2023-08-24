@@ -23,11 +23,9 @@ export default async function handler(req, res) {
       const startingGoalList = filteredListByUser.filter(goal => {
         const now = dayjs();
         const [start, due] = goal.dueDate;
-        const startDate = dayjs(start);
-        const dueDate = dayjs(due);
-        return (
-          now.isSameOrAfter(startDate) && now.isSameOrBefore(dueDate) && goal.isFinished === false
-        );
+        const startDate = dayjs(start).startOf("day"); // Set to the start of the day
+        const dueDate = dayjs(due).endOf("day"); // Set to the end of the day
+        return now.isSameOrAfter(startDate) && now.isSameOrBefore(dueDate) && !goal.isFinished;
       });
 
       res.status(200).json(startingGoalList);
