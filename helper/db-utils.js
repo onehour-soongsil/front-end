@@ -44,14 +44,24 @@ export async function getGoalList() {
   return goalList;
 }
 
-export async function getSelectedGoalData(postId) {
+export async function getSelectedGoalData(goalId) {
   const client = await connectDatabase();
   const db = client.db();
-  const result = await db.collection("goal-list").findOne({ _id: new ObjectId(postId) });
+  const result = await db.collection("goal-list").findOne({ _id: new ObjectId(goalId) });
 
   if (result) {
     result._id = result._id.toString();
   }
+
+  client.close();
+  return result;
+}
+
+// _id를 string으로 변환하지 않고 그대로 가져오는 함수
+export async function getGoalData(goalId) {
+  const client = await connectDatabase();
+  const db = client.db();
+  const result = await db.collection("goal-list").findOne({ _id: new ObjectId(goalId) });
 
   client.close();
   return result;
