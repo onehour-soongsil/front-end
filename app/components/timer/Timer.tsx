@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import axios from "axios";
+import dayjs from "dayjs";
 import Button from "../ui/Button";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 
-export default function Timer(props) {
-  const { _id } = props.selectedGoal;
+export default function Timer({ selectedGoal }) {
+  const { _id: goalId } = selectedGoal;
   const [time, setTime] = useState(0);
   const [duringStopTime, setDuringStopTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -71,26 +72,30 @@ export default function Timer(props) {
     setIsCompleted(true);
     stopTimer(); // stopTimer 함수 실행
 
+    const nowGoalRoundsData = {
+      nowGoalRounds: dayjs().toISOString(), // 현재 날짜와 시간을 ISO 포맷으로 변환
+    };
+
     // API 요청으로 nowGoalRounds 증가시키기
     try {
-      await axios.post(`/api/goals/${_id}`, { nowGoalRounds: 1 }); //dayjs 객체로 날짜, 시간 전달
+      await axios.post(`/api/goal/complete-today/${goalId}`, nowGoalRoundsData);
       console.log("nowGoalRounds 증가 성공");
     } catch (error) {
-      console.error("nowGoalRounds 증가 실패", error);
+      console.error(error);
     }
 
     const today = new Date().toISOString().substring(0, 10);
-    localStorage.setItem(`key_${_id}`, today);
+    localStorage.setItem(`key_${goalId}`, today);
   };
 
   useEffect(() => {
-    if (time >= 3600 && !isCompleted) {
+    if (time >= 5 && !isCompleted) {
       handleCompletion();
     }
   }, [time, isCompleted]);
 
   useEffect(() => {
-    if (localStorage.getItem(`key_${_id}`)) {
+    if (localStorage.getItem(`key_${goalId}`)) {
       setIsCompletedToday(true);
     }
   }, []);

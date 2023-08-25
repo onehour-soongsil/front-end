@@ -63,9 +63,7 @@ export default function CreateGoalPage() {
     axios
       .post("/api/goal/create-goal", {
         ...values,
-        nowGoalRounds: 0,
-        goalPercentages: 0,
-        isFinished: false,
+        nowGoalRounds: [],
         goalImage: imgSrc,
       })
       .then(res => {

@@ -22,5 +22,12 @@ export default async function middleware(request) {
     return NextResponse.next();
   }
 
+  if (request.nextUrl.pathname.startsWith("/mypage")) {
+    if (session == null) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+    return NextResponse.next();
+  }
+
   return NextResponse.next();
 }

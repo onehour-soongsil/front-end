@@ -9,8 +9,14 @@ export default async function handler(req, res) {
         throw new Error("토큰이 유효하지 않습니다...");
       }
 
+      const goalPercentages = Math.floor(
+        (req.body.nowGoalRounds.length / req.body.totalGoalRounds) * 100
+      );
+      const isFinished = goalPercentages >= 100;
       const goalData = {
         ...req.body,
+        goalPercentages,
+        isFinished,
         email: token.user.email,
       };
       const result = await insertDocument("goal-list", goalData);

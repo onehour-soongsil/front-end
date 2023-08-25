@@ -4,14 +4,13 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Lottie from "lottie-react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Timer from "../timer/Timer";
 import trophy from "../../../public/images/trophy.png";
 import torchAnimation from "../../../public/data/torch-animation.json";
-import GoalEditForm from "../goal/GoalEdit";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 import edit from "@/public/images/edit.jpg";
+import report from "@/public/images/report.png";
 
 interface SelectedGoalItemType {
   _id: string;
@@ -72,7 +71,7 @@ export default function Main({ _id }: { _id: string }) {
               <h1 className="text-5xl tracking-tighter font-bold text-main-color">
                 꺼지지 않는 불꽃처럼
               </h1>
-              <p className="text-2xl  leading-15 tracking-tighter text-basic-black">
+              <p className="text-2xl leading-15 tracking-tighter text-basic-black">
                 목표 달성도에따라 성화가 점등됩니다
               </p>
             </div>
@@ -138,7 +137,7 @@ export default function Main({ _id }: { _id: string }) {
             </ul>
           </div>
           <div id="3" className="relative h-screen w-full flex flex-col justify-center">
-            <div className="">
+            <div className="px-8">
               <div className="flex justify-center items-center">
                 <Image
                   src={edit}
@@ -156,6 +155,27 @@ export default function Main({ _id }: { _id: string }) {
                 href={`/edit/${_id}`}
               >
                 목표 수정하기
+              </Link>
+            </div>
+
+            <div className="px-8">
+              <div className="flex justify-center items-center">
+                <Image
+                  src={report}
+                  alt="edit icon"
+                  width={225}
+                  height={225}
+                  className="flex flex-row justify-center mt-8"
+                />
+              </div>
+              <p className="flex flex-row justify-center py-3 text-gray-500">
+                내가 얼마나 달성했는지 궁금하다면
+              </p>
+              <Link
+                className="text-3xl flex flex-row justify-center font-bold"
+                href={`/summary/${_id}`}
+              >
+                목표 요약
               </Link>
             </div>
           </div>
