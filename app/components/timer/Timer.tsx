@@ -73,7 +73,7 @@ export default function Timer(props) {
 
     // API 요청으로 nowGoalRounds 증가시키기
     try {
-      await axios.put(`/api/goals/${_id}`, { nowGoalRounds: 1 });
+      await axios.post(`/api/goals/${_id}`, { nowGoalRounds: 1 }); //dayjs 객체로 날짜, 시간 전달
       console.log("nowGoalRounds 증가 성공");
     } catch (error) {
       console.error("nowGoalRounds 증가 실패", error);
