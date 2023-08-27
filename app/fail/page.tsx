@@ -3,8 +3,8 @@ import GoalList from "../components/goal/GoalList";
 
 export const dynamic = "force-dynamic";
 
-async function getToProceedGoalList() {
-  const res = await fetch(`http://localhost:3000/api/goal/toProceed-goalList`, {
+async function getFailGoalList() {
+  const res = await fetch(`http://localhost:3000/api/goal/fail-goalList`, {
     method: "GET",
     headers: headers(),
     next: { revalidate: 15 },
@@ -14,7 +14,7 @@ async function getToProceedGoalList() {
 }
 
 export default async function Page() {
-  const data = await getToProceedGoalList();
+  const data = await getFailGoalList();
 
-  return <GoalList data={data} type="toProceed" />;
+  return <GoalList data={data} type="fail" />;
 }

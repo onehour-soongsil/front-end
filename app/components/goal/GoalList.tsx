@@ -54,7 +54,13 @@ export default function GoalPage({ data, type }) {
     >
       <div className="h-screen overflow-hidden">
         <div className="flex justify-center mt-16 font-bold text-6xl">
-          {type === "starting" ? "목표를 선택해볼까요?" : "진행예정인 목표입니다"}
+          {type === "starting"
+            ? "목표를 선택해볼까요?"
+            : type === "success"
+            ? "성공한 목표입니다"
+            : type === "fail"
+            ? "실패한 목표입니다"
+            : "진행예정인 목표입니다"}
         </div>
         <div className="flex justify-center">
           <div className="mt-48 mr-11">
@@ -69,24 +75,39 @@ export default function GoalPage({ data, type }) {
               {goalList &&
                 goalList.map(goal => (
                   <div key={goal._id}>
-                    <div>
-                      <Link href={`/detail/${goal._id}`}>
-                        <h3 style={contentStyle}>
-                          <div>
-                            <Image src={goal.goalImage} alt="image1" width="400" height="400" />
-                          </div>
+                    <div className="text-center">
+                      {type === "starting" ? (
+                        <Link href={`/detail/${goal._id}`}>
                           <span className="font-bold text-3xl">{goal.goalTitle}</span>
-                        </h3>
-                      </Link>
+                          <h3 style={contentStyle}>
+                            <div>
+                              <Image src={goal.goalImage} alt="image1" width="400" height="400" />
+                            </div>
+                          </h3>
+                        </Link>
+                      ) : (
+                        <>
+                          <span className="font-bold text-3xl">{goal.goalTitle}</span>
+                          <h3 style={contentStyle}>
+                            <div>
+                              <Image src={goal.goalImage} alt="image1" width="400" height="400" />
+                            </div>
+                          </h3>
+                        </>
+                      )}
                     </div>
                     <div className="flex justify-center">
-                      <Link href={`/detail/${goal._id}`}>
-                        <Button
-                          className="mt-5 bg-main-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
-                          type="ghost"
-                          text="목표 시작"
-                        />
-                      </Link>
+                      {type === "starting" ? (
+                        <Link href={`/detail/${goal._id}`}>
+                          <Button
+                            className="mt-5 bg-main-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
+                            type="ghost"
+                            text="목표 시작"
+                          />
+                        </Link>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </div>
                 ))}

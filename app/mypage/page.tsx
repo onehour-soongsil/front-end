@@ -87,18 +87,18 @@ export default function MyPage() {
           <li>
             <div className={styles.userInfoTitle}>
               <h1>성공한 목표</h1>
-              <button type="button" className={styles.withdrawBtn}>
+              <Link href="/success" type="button" className={styles.passwordChangeBtn}>
                 확인하기
-              </button>
+              </Link>
             </div>
             <p className={styles.userInfoDesc}>성공한 목표들을 확인할 수 있습니다.</p>
           </li>
           <li>
             <div className={styles.userInfoTitle}>
               <h1>실패한 목표</h1>
-              <button type="button" className={styles.withdrawBtn}>
+              <Link href="/fail" type="button" className={styles.passwordChangeBtn}>
                 확인하기
-              </button>
+              </Link>
             </div>
             <p className={styles.userInfoDesc}>실패한 목표들을 확인할 수 있습니다.</p>
           </li>
