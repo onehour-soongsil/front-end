@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const goal = await getGoalData(goalId);
-
+      console.log(req.body);
       goal.nowGoalRounds.push(req.body);
       goal.goalPercentages = Math.floor((goal.nowGoalRounds.length / goal.totalGoalRounds) * 100);
       goal.isFinished = goal.goalPercentages >= 100;
