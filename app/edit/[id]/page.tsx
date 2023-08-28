@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Dayjs } from "dayjs";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import Loading from "@/app/components/loadingbar/Loading";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -144,7 +145,7 @@ export default function Edit(props: { params: { id: any } }) {
     },
   ];
 
-  if (selectedGoal.length === 0) return <h1>로딩중...</h1>;
+  if (selectedGoal.length === 0) return <Loading />;
 
   if (selectedGoal.length !== 0) {
     return (

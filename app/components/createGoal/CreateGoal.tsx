@@ -201,6 +201,22 @@ export default function CreateGoalPage() {
           open={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}
+          okButtonProps={{
+            style: {
+              backgroundColor: "red",
+              borderColor: "white",
+              color: "white",
+              transition: "none",
+            },
+            onMouseOver: e => {
+              e.currentTarget.style.backgroundColor = "red";
+              e.currentTarget.style.borderColor = "red";
+            },
+            onMouseOut: e => {
+              e.currentTarget.style.backgroundColor = "red";
+              e.currentTarget.style.borderColor = "red";
+            },
+          }}
         >
           <p>{modalMessage && modalMessage}</p>
         </Modal>
