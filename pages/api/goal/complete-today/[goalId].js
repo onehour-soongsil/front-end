@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { getGoalData, replaceDocument } from "../../../../helper/db-utils";
 
 export default async function handler(req, res) {
