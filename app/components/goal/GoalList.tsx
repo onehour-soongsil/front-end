@@ -12,7 +12,7 @@ import NoGoalList from "./NoGoalList";
 
 const contentStyle: React.CSSProperties = {
   margin: 0,
-  height: "400px",
+  height: "380px",
   color: "#000",
   textAlign: "center",
 };
@@ -78,21 +78,21 @@ export default function GoalPage({ data, type }) {
                     <div className="text-center">
                       {type === "starting" ? (
                         <Link href={`/detail/${goal._id}`}>
-                          <span className="font-bold text-3xl">{goal.goalTitle}</span>
                           <h3 style={contentStyle}>
                             <div>
                               <Image src={goal.goalImage} alt="image1" width="400" height="400" />
                             </div>
                           </h3>
+                          <span className="font-bold text-3xl">{goal.goalTitle}</span>
                         </Link>
                       ) : (
                         <>
-                          <span className="font-bold text-3xl">{goal.goalTitle}</span>
                           <h3 style={contentStyle}>
                             <div>
                               <Image src={goal.goalImage} alt="image1" width="400" height="400" />
                             </div>
                           </h3>
+                          <span className="font-bold text-3xl">{goal.goalTitle}</span>
                         </>
                       )}
                     </div>
@@ -100,7 +100,7 @@ export default function GoalPage({ data, type }) {
                       {type === "starting" ? (
                         <Link href={`/detail/${goal._id}`}>
                           <Button
-                            className="mt-5 bg-main-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
+                            className="mt-6 bg-main-color w-177 h-75 font-bold text-2xl hover:bg-red-300"
                             type="ghost"
                             text="목표 시작"
                           />
