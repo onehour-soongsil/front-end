@@ -29,6 +29,9 @@
     "react/require-default-props": "off", // defaultProps 요구 규칙 비활성화
     "no-underscore-dangle": "off", // mongoDB _id에 접근하기 위해 비활성화
     "react/jsx-no-useless-fragment": "off",
-    "no-nested-ternary": "off"
+    "no-nested-ternary": "off",
+    // 모든 오류 무시
+    "react/no-unstable-nested-components": "off",
+    "typescript-eslint/no-shadow": "off"
   }
 }
