@@ -11,6 +11,7 @@ import torchAnimation from "../../../public/data/torch-animation.json";
 import FinishTodaysGoal from "../FinishTodaysGoal/FinishTodaysGoal";
 import edit from "@/public/images/edit.jpg";
 import report from "@/public/images/report.png";
+import Loading from "@/app/components/loadingbar/Loading";
 
 interface SelectedGoalItemType {
   _id: string;
@@ -50,7 +51,7 @@ export default function Main({ _id }: { _id: string }) {
     };
   });
 
-  if (selectedGoal.length === 0) return <h1>로딩중...</h1>;
+  if (selectedGoal.length === 0) return <Loading />;
 
   if (selectedGoal.length !== 0) {
     return (

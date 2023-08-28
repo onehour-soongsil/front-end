@@ -6,10 +6,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
-import dayjs from "dayjs";
-import Lottie from "lottie-react";
-import loaing from "../../../public/data/loading-animation.json";
 import report from "@/public/images/report.png";
+import Loading from "@/app/components/loadingbar/Loading";
 
 interface SelectedGoalItemType {
   _id: string;
@@ -33,13 +31,7 @@ export default function Summary(props: { params: { id: any } }) {
       .catch(err => console.error(err));
   }, [id]);
 
-  if (selectedGoal.length === 0)
-    return (
-      <div className="w-full h-screen flex flex-col justify-center">
-        <Lottie className="w-80 h-full mx-auto" animationData={loaing} />
-        <p>로딩중</p>
-      </div>
-    );
+  if (selectedGoal.length === 0) return <Loading />;
 
   if (selectedGoal.length !== 0) {
     const endDate = new Date(selectedGoal.dueDate[1]);
