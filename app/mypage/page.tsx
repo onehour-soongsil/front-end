@@ -6,6 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import styles from "./page.module.css";
 import ModalComponent from "../components/ui/modal/Modal";
+import InputModal from "../components/ui/modal/InputModal";
 
 export default function MyPage() {
   const session = useSession();
@@ -43,6 +44,7 @@ export default function MyPage() {
         onOk={handleDeleteUser}
         onCancel={handleCancel}
       />
+      <InputModal title="알림" open={openModal} onCancel={handleCancel} />
       <div className={styles.container}>
         <div className={styles.userProfile}>
           <div className={styles.userImageContainer}>
@@ -70,7 +72,13 @@ export default function MyPage() {
           <li>
             <div className={styles.userInfoTitle}>
               <h1>비밀번호 변경</h1>
-              <button type="button" className={styles.passwordChangeBtn}>
+              <button
+                onClick={() => {
+                  handleOpenModal("기존 비밀번호를 입력하세요.");
+                }}
+                type="button"
+                className={styles.passwordChangeBtn}
+              >
                 변경하기
               </button>
             </div>
