@@ -1,34 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 서비스 소개
+![4](https://github.com/onehour-soongsil/front-end/assets/44885816/6e053a0b-c7d1-4d59-b3bc-ec1e48215d32)
 
-## Getting Started
+![5](https://github.com/onehour-soongsil/front-end/assets/44885816/d2c33f60-4cba-482d-88ba-a20275289c09)
 
-First, run the development server:
+## 팀원 소개
+![3](https://github.com/onehour-soongsil/front-end/assets/44885816/65c4f1e2-8956-420e-bb4a-7995ee5832b3)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## 협업 전략
+![6](https://github.com/onehour-soongsil/front-end/assets/44885816/ab5d2e5a-08a7-4b2d-8c6d-6bbfaf31073c)
+![7](https://github.com/onehour-soongsil/front-end/assets/44885816/b7db5d1c-56dd-4693-b1cc-9047af76fc7e)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 주요 기능
+![8](https://github.com/onehour-soongsil/front-end/assets/44885816/0ea14f4c-44c5-491d-bbcb-18b4e8eed1dc)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 소감
+![13](https://github.com/onehour-soongsil/front-end/assets/44885816/3d4c3645-1fef-463b-9909-1516cf400013)
+![17](https://github.com/onehour-soongsil/front-end/assets/44885816/3995dcf4-d38e-44ce-ade9-e1de5db58c66)
+![16](https://github.com/onehour-soongsil/front-end/assets/44885816/c29ae5cc-9a78-4300-adf0-c1c09093f6eb)
